@@ -4,7 +4,7 @@ MAINTAINER Dominik Ebert <doe@zuelhke.com>
 # See: https://github.com/jenkinsci/docker
 
 # install java
-RUN apt-get update && apt-get install -y default-jdk
+RUN apt-get update && apt-get install -y default-jre
 
 # use jenkins repository
 RUN apt-get update && apt-get install -y wget
