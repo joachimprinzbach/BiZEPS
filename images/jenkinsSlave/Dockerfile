@@ -6,6 +6,9 @@ MAINTAINER Dominik Ebert <doe@zuelhke.com>
 # install JDK
 RUN apt-get update && apt-get install -y default-jre
 
+#install python
+RUN apt-get update && apt-get install -y python
+
 # install git
 RUN apt-get update && apt-get install -y git
 
