@@ -2,7 +2,9 @@
 Debian is suggested as base image by Docker documentation.
 
 ##  Jenkins
-Use Jenkins with Debian base image. See official Jenkins image: https://github.com/jenkinsci/docker
+See official Jenkins image: https://github.com/jenkinsci/docker
+Used Debian as base image and installed Jenkins manually.
+Consider to use the official Jenkins Dockerfile and modify to use Debian and install Java.
 
 ##  Jenkins Volume
 A data only container is used for the Jenkins image.

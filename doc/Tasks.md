@@ -12,10 +12,15 @@ HelloWorld-Project from git hub can be built on the DockerCI
 - Documentation for setup is available
 
 **Tasks**
-- Create Jenkins docker image with dockerfile
+- Create Jenkins docker image with Dockerfile
 - Manage Jenkins volume (jenkins_home) in a docker volume container
 - Define and create Jenkins slave docker image with dockerfile
 - Define gcc/g++ docker image with dockerfile
+
+
+### Jenkins Master
+- Update Jenkins plugins automatically from Dockerfile
+- Install required Jenkins Docker plug ins from Dockerfile
 
 ### DockerCI Security
 **Acceptance Criteria**
@@ -48,3 +53,6 @@ Create additional tool chains for DockerCI (g++ for Windows, RasPi, mono ...)
   * Would be nice if there would be a docker tool chain image similar to gcc/g
   * Not sure if it would be possible to release new docker images at DockerCI
   * If it is not working, use the 2nd docker plug-in to run docker commands on the host
+
+### DockerCI at Development Machine
+Concept for DockerCI for a single seat developer. How to integrate with IDE?
