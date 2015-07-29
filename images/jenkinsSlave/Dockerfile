@@ -3,13 +3,9 @@ MAINTAINER Dominik Ebert <doe@zuelhke.com>
 
 #See: https://registry.hub.docker.com/u/evarga/jenkins-slave
 
-# install JDK
+
 RUN apt-get update && apt-get install -y default-jre
-
-#install python
 RUN apt-get update && apt-get install -y python
-
-# install git
 RUN apt-get update && apt-get install -y git
 
 # install SSH server

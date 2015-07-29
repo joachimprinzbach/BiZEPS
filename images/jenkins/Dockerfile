@@ -6,7 +6,7 @@ MAINTAINER Dominik Ebert <doe@zuelhke.com>
 # install java
 RUN apt-get update && apt-get install -y default-jre
 
-# use jenkins repository
+# use jenkins repository in debian
 RUN apt-get update && apt-get install -y wget
 RUN wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
 RUN echo deb http://pkg.jenkins-ci.org/debian binary/ >> /etc/apt/sources.list
@@ -14,11 +14,11 @@ RUN echo deb http://pkg.jenkins-ci.org/debian binary/ >> /etc/apt/sources.list
 ENV JENKINS_HOME /var/jenkins_home
 
 # Jenkins is ran with user `jenkins`, uid = 1000
-# If you bind mount a volume from host/vloume from a data container, 
+# If you bind mount a volume from host/volume from a data container, 
 # ensure you use same uid
 RUN useradd -d "$JENKINS_HOME" -u 1000 -m -s /bin/bash jenkins
 
-# Jenkins home directoy is a volume, so configuration and build history 
+# Jenkins home directory is a volume, so configuration and build history 
 # can be persisted and survive image upgrades
 VOLUME /var/jenkins_home
 
