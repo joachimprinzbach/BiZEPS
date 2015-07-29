@@ -3,13 +3,13 @@ MAINTAINER Dominik Ebert <doe@zuelhke.com>
 
 # See: https://github.com/jenkinsci/docker
 
+# install java
+RUN apt-get update && apt-get install -y default-jdk
+
 # use jenkins repository
 RUN apt-get update && apt-get install -y wget
 RUN wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
 RUN echo deb http://pkg.jenkins-ci.org/debian binary/ >> /etc/apt/sources.list
-
-# install java
-RUN apt-get update && apt-get install -y default-jdk
 
 ENV JENKINS_HOME /var/jenkins_home
 

@@ -12,10 +12,11 @@ HelloWorld-Project from git hub can be built on the DockerCI
 - Documentation for setup is available
 
 **Tasks**
+- Define and create Jenkins slave docker image with Dockerfile
+- Define gcc/g++ docker image with Dockerfile
+*DONE*
 - Create Jenkins docker image with Dockerfile
 - Manage Jenkins volume (jenkins_home) in a docker volume container
-- Define and create Jenkins slave docker image with dockerfile
-- Define gcc/g++ docker image with dockerfile
 
 
 ### Jenkins Master
