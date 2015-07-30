@@ -1,6 +1,6 @@
 ##  Backlog
 
-####  Issue: Docker Volume
+###  Issue: Docker Volume
 **Dependencies:**
 If the Jenkins volume image (and the created container) are depending from the Jenkins image,
 The Jenkins image cannot be deleted without removing the the volume container.
@@ -20,7 +20,7 @@ instead of debian:jessie.
 In the Jenkins Dockerfile, a user 'jenkins' is created with a specific UID,
 maybe this UID should be reused for the volumes?
 
-### Fature: Jenkins Master Initialization
+### Feature: Jenkins Master Initialization
 **Acceptance Criteria:**
 When DockerCI is installed and Jenkins is first started,
 all required plug ins are installed and up to date.
@@ -29,7 +29,7 @@ all required plug ins are installed and up to date.
 - Install required Jenkins Docker plug ins from Dockerfile or at first startup
 - Secure Jenkins (User and Password)
 
-### DockerCI Security
+### Security: DockerCI Security
 **Acceptance Criteria:**
 Sensitive communication channels are secured
 
@@ -43,7 +43,7 @@ Sensitive communication channels are secured
     * How to create and distribute in DockerCI environment
     * Scripts?
 
-### DockerCI at Amazon Cloud
+### Feature: DockerCI at Amazon Cloud
 **Acceptance Criteria:**
 DockerCI runs on Amazon AWS cloud
 
@@ -52,10 +52,10 @@ DockerCI runs on Amazon AWS cloud
 - Install script for Docker at AWS cloud
 - Setup and test DockerCI at cloud
 
-### DockerCI Tool Chains
-Create additional tool chains for DockerCI (g++ for Windows, RasPi, mono ...)
+### Feature: DockerCI Tool Chains
+Create additional tool chains for DockerCI (g++ for Windows, RasPi, Mono ...)
 
-### DockerCI Image Management
+### Concept: DockerCI Image Management
 - Define work flow for docker images with dockerfiles
 - Specify docker image version management
 - How are new docker images created?
@@ -63,5 +63,5 @@ Create additional tool chains for DockerCI (g++ for Windows, RasPi, mono ...)
     * Not sure if it would be possible to release new docker images at DockerCI
     * If it is not working, use the 2nd docker plug-in to run docker commands on the host
 
-### DockerCI at Development Machine
+### Concept: DockerCI at Development Machine
 Concept for DockerCI for a single seat developer. How to integrate with IDE?
