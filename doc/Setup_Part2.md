@@ -8,6 +8,8 @@ See official Jenkins image: https://github.com/jenkinsci/docker
 Used Debian as base image and installed Jenkins manually.
 Consider to use the official Jenkins Dockerfile and modify to use Debian and install Java.
 
+##  Jenkins Docker Plug In
+
 ##  Using Volume Container for Jenkins
 
 - Volume container must be created but not started

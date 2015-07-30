@@ -13,10 +13,10 @@
     * Jenkins Slave
     * GCC Slave
 
-#   Further Reading
-[Backlog](doc/Tasks.md)
+#   References
 
-[DockerCI, one step by another](doc/Setup.md)
+- [Backlog](doc/Tasks.md)
+- [DockerCI, one step by another](doc/Setup.md)
 
 #   Overview
 DockerCI realizes a continuous integration build system with Docker and Jenkins.

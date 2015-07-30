@@ -7,6 +7,6 @@ The reason why the previous implementation is insufficient should also be docume
 **Reason:**
 The content of this document could be used to write one or more bloc articles about DockerCI.
 
-[Part 1: Getting Started](Setup_Part1.md)
-
-[Part 2: Create Jenkins Image](Setup_Part2.md)
+- [Part 1: Getting Started](Setup_Part1.md)
+- [Part 1.5: Knowing boot2docker](Setup_Part1_5.md)
+- [Part 2: Create Jenkins Image](Setup_Part2.md)

@@ -12,6 +12,8 @@ cannot be installed on Windows.
 But Docker can run within a VM with Linux on Windows.
 This is where boot2docker is used.
 
+On the long run boo2docker will probably be replaced by [docker machine](https://docs.docker.com/machine/).
+
 <a name="p1_windows"/>
 #   boot2docker on Windows
 - [boot2docker](https://github.com/boot2docker)
