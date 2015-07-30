@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Dominik Ebert <doe@zuelhke.com>
+MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # See: https://github.com/jenkinsci/docker
 

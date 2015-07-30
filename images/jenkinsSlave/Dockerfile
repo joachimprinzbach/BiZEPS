@@ -1,5 +1,5 @@
 FROM debian:jessie
-MAINTAINER Dominik Ebert <doe@zuelhke.com>
+MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 #See: https://registry.hub.docker.com/u/evarga/jenkins-slave
 
