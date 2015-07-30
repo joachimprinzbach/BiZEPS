@@ -1,5 +1,4 @@
 #! /bin/bash
-# See: https://github.com/jenkinsci/docker
 
 set -e
 
