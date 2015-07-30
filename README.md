@@ -5,6 +5,19 @@ For each build job, a Jenkins slave runs in its own container.
 Each tool chain is managed in its own docker image.
 The DockerCI creates and manages its tool chain images with docker files.
 
-[TODO](doc/Tasks.md)  
+##  Status 30.07.2015
+- First draft of DockerCI runs with boot2docker on Windows
+- Docker Host API is currently not secured (Jenkins requires API access)
+- Building the [jenkinsTrial](https://github.com/icebear8/jenkinsTrial) for Linux is possible
+    * git hub
+    * python
+    * g++
+- Dockerfiles are available for
+    * Jenkins
+    * Jenkins Volume
+    * Jenkins Slave
+    * GCC Slave
+
+[Backlog](doc/Tasks.md)
 
 [Setup](doc/Setup.md)

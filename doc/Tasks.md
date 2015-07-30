@@ -1,36 +1,15 @@
-##  TODO
-### First draft with boot2docker on Windows
-**Acceptance Criteria:**
-HelloWorld-Project from git hub can be built on the DockerCI
+##  Backlog
 
-- [jenkinsTrial](https://github.com/icebear8/jenkinsTrial) project is used
-    * g++
-    * python
-    * git hub
-- Jenkins runs in a docker container
-- The build job runs in a docker container
-- The docker images were created by a dockerfile
-- Documentation for setup is available
-
-**Tasks**
-*DONE*
-
-- Create Jenkins docker image with Dockerfile
-- Manage Jenkins volume (jenkins_home) in a docker volume container
-- Define and create Jenkins slave docker image with Dockerfile
-- Define gcc/g++ docker image with Dockerfile
-
-### Open Issues
-####  Docker Volume Dependencies
+####  Issue: Docker Volume
+**Dependencies**
 
 If the Jenkins volume image (and the created container) are depending from the Jenkins image,
 The Jenkins image cannot be deleted without removing the the volume container.
 The Jenkins volume container should not depend on the Jenkins image because of the update scenarios.
 
-When DockerCI is up and running, try to modify the dci/voljenkins to depend on debian:jessie
-instead of dci/jenkins
+Try to modify the dci/voljenkins to depend on debian:jessie instead of dci/jenkins. 
 
-#### Docker Volume Access Rights
+**Access Rights**
 
 The debian:jessie image was used to temporary backup the volume data on the host.
 The recovery was also done with the debian image.
@@ -45,7 +24,7 @@ maybe this UID should be reused for the volumes?
 
 ### Jenkins Master
 
-- Update Jenkins plugins automatically from Dockerfile
+- Update Jenkins plug ins automatically from Dockerfile
 - Install required Jenkins Docker plug ins from Dockerfile
 
 ### DockerCI Security
