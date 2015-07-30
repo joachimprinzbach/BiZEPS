@@ -4,14 +4,16 @@ On this page:
 - [Setup a Docker Host Machine](#p1_setupHost)
 - [Docker on Windows](#p1_windows)
 
-#   Setup a Docker Host Machine <a name="p1_setupHost"/>
+<a name="p1_setupHost"/>
+#   Setup a Docker Host Machine
 To start with DockerCI first a host with a working Docker installation is required.
 Currently Docker runs only on a Linux distribution and
 cannot be installed on Windows.
 But Docker can run within a VM with Linux on Windows.
 This is where boot2docker is used.
 
-#   boot2docker on Windows <a name="p1_windows"/>
+<a name="p1_windows"/>
+#   boot2docker on Windows
 - [boot2docker](https://github.com/boot2docker)
 - [Installation on Windows](https://docs.docker.com/installation/windows/)
 
