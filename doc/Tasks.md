@@ -1,16 +1,14 @@
 ##  Backlog
 
 ####  Issue: Docker Volume
-**Dependencies**
-
+**Dependencies:**
 If the Jenkins volume image (and the created container) are depending from the Jenkins image,
 The Jenkins image cannot be deleted without removing the the volume container.
 The Jenkins volume container should not depend on the Jenkins image because of the update scenarios.
 
 Try to modify the dci/voljenkins to depend on debian:jessie instead of dci/jenkins. 
 
-**Access Rights**
-
+**Access Rights:**
 The debian:jessie image was used to temporary backup the volume data on the host.
 The recovery was also done with the debian image.
 This lead into user access right problems, because the Jenkins image uses Jenkins as the default user
@@ -22,15 +20,18 @@ instead of debian:jessie.
 In the Jenkins Dockerfile, a user 'jenkins' is created with a specific UID,
 maybe this UID should be reused for the volumes?
 
-### Jenkins Master
+### Fature: Jenkins Master Initialization
+**Acceptance Criteria:**
+When DockerCI is installed and Jenkins is first started,
+all required plug ins are installed and up to date.
 
-- Update Jenkins plug ins automatically from Dockerfile
-- Install required Jenkins Docker plug ins from Dockerfile
+- Update Jenkins plug ins automatically from Dockerfile or at first startup
+- Install required Jenkins Docker plug ins from Dockerfile or at first startup
+- Secure Jenkins (User and Password)
 
 ### DockerCI Security
-**Acceptance Criteria**
-
-- Sensitive communication channels are secured
+**Acceptance Criteria:**
+Sensitive communication channels are secured
 
 **Tasks**
 
@@ -43,7 +44,7 @@ maybe this UID should be reused for the volumes?
     * Scripts?
 
 ### DockerCI at Amazon Cloud
-**Acceptance Criteria**
+**Acceptance Criteria:**
 DockerCI runs on Amazon AWS cloud
 
 **Tasks**
@@ -55,7 +56,6 @@ DockerCI runs on Amazon AWS cloud
 Create additional tool chains for DockerCI (g++ for Windows, RasPi, mono ...)
 
 ### DockerCI Image Management
-
 - Define work flow for docker images with dockerfiles
 - Specify docker image version management
 - How are new docker images created?
