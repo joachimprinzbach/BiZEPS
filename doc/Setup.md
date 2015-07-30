@@ -1,4 +1,5 @@
-#   Setup
+#   Building DockerCI
+
 
 Debian is suggested as base image by Docker documentation.
 
@@ -35,4 +36,5 @@ After the build step, the Docker container is removed again.
 The Docker Jenkins slave image requires JRE and an SSH server.
 
 https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin
+
 https://registry.hub.docker.com/u/evarga/jenkins-slave/dockerfile/
