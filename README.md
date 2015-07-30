@@ -25,6 +25,9 @@ For each build job, a Jenkins slave runs in its own container.
 Each tool chain is managed in its own docker image.
 The DockerCI creates and manages its tool chain images with docker files.
 
+DockerCI has the vision to be used on the server as also on the local development machine.
+The corresponding tool chain container could be used from the IDE to build (and run?) the source code.
+
 ##  DockerCI Advantages
 ### Separation of Tool Chains
 Every tool chain has its own container (virtual context) and runs independent from other containers.
@@ -51,6 +54,13 @@ To update an application in DockerCI, the image of the corresponding container m
 The current container and the container from the updated image can concurrently run on the Docker Host.
 This means that an application update can be tested before the old container is replaced by the updated container.
 If the updated application container does not behave as expected, a roll back to the previous version can be done.
+
+### Simple Distribution of the Development Environment
+If parts of DockerCI could also be used on the development machine the developer
+would use the same environment as the build server.
+This means local builds would no more be affected by local installations (e.g. new version of a specific library).
+
+The tool chain update could be provided in the same way as for the build server.
 
 ## Architecture
 ![DockerCI Overview](doc/Images/DockerCI_Overview.jpg "DockerCI overview")
@@ -94,7 +104,7 @@ When Jenkins (Master) is triggered to build a repository he first starts the cor
 Afterwards he sends the Jenkins slave binary and the build information to the Docker container.
 The Docker slave container starts the Jenkins slave which executes the appropriate build actions.
 
-## Build Project Recommendations
+##  Project Repository Recommendations
 ### Keep Build Jobs Simple and Minimalistic
 A build job in Jenkins is stored as an xml file in the Jenkins file system
 (located at `/var/jenkins_home/jobs/{JOB}/config.xml`).
@@ -108,16 +118,38 @@ Currently the minimalistic approach is that the DockerCI job executes the Python
 located at `scripts/build.py`.
 As long as this behavior is not changed all projects can be built with the same build job.
 
-## Images and Layering
+##  Images and Layering
+Base image is Debian Jessie.
 
-### dci/jenkins*
+### dci/jenkins
+The Jenkins (master) image is dependent from the base Debian image and installs:
+
+- JRE
+- Jenkins
+- Creates user 'jenkins'
+
+Installed Jenkins plug ins:
+
+- Docker plug in
+- Git
 
 ### dci/voljenkins
+This image is used to create a data only container which holds the Jenkins working directory.
+Currently it depends on the dci/jenkins image but maybe this dependency will may be eliminated
+and the volume will be dependent from the Debian base image.
 
 ### dci/jenkinsslave
+The image of a generic slave depends on the base Debian Jessie image and installs:
+
+- JRE
+- Python
+- SSH server
+- Creates user 'jenkins'
 
 ### dci/gccslave
+Is based on dci/jenkinsslave and installs:
 
+- g++
 
 
 

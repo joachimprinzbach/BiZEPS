@@ -1,15 +1,25 @@
 #   Building DockerCI
+This section describes how DockerCI is realized as a step by step documentation.
+The documentation reflects the current system state and should not be written in diary style.
+If a part in DockerCI is changed the corresponding step should be updated.
+The reason why the previous implementation is insufficient should also be documented.
+
+**Reason:**
+The content of this document could be used to write one or more bloc articles about DockerCI.
+
+## Part 1: Start Using Docker
+[Part 1](Setup_Part1.md)
 
 
+## Creating Jenkins Master Image
 Debian is suggested as base image by Docker documentation.
 
-##  Jenkins
 
 See official Jenkins image: https://github.com/jenkinsci/docker
 Used Debian as base image and installed Jenkins manually.
 Consider to use the official Jenkins Dockerfile and modify to use Debian and install Java.
 
-##  Jenkins Volume
+##  Using Volume Container for Jenkins
 
 - Volume container must be created but not started
 - Volume container is referenced from Jenkins
