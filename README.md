@@ -12,9 +12,9 @@
     * Jenkins Volume
     * Jenkins Slave
     * GCC Slave
-- [Backlog](doc/Tasks.md)
-    
-**References**
+
+#   Further Reading
+[Backlog](doc/Tasks.md)
 
 [DockerCI, one step by another](doc/Setup.md)
 
