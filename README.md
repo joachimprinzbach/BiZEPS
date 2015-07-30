@@ -5,7 +5,7 @@ For each build job, a Jenkins slave runs in its own container.
 Each tool chain is managed in its own docker image.
 The DockerCI creates and manages its tool chain images with docker files.
 
-![DockerCI Overview](doc/Images/DockerCIOverview.jpg)
+![DockerCI Overview](doc/Images/DockerCI_Overview.jpg)
 
 
 
