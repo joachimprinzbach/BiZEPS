@@ -41,7 +41,7 @@ The created image size could even smaller if the binaries would not be downloade
 but pre downloaded and added to the image with the `COPY` command.
 But this would lead into extra disk space for the pre downloaded binaries.
 
-The creatin of this Dockerfile shows the difficulty to choose between maintainability,
+The creation of this Dockerfile shows the difficulty to choose between maintainability,
 reproducibility, speed and size.
 
 ### Do not Install with Package Manager
@@ -62,8 +62,6 @@ But the maintenance of the Dockerfile would be better if the Dockerfile stays as
 official implementation as possible.
 This simplifies merging the changes to the own file.
 
-##  Jenkins Docker Plug In
-
 ##  Using Volume Container for Jenkins
 
 - Volume container must be created but not started
@@ -81,6 +79,8 @@ See:
 - http://container-solutions.com/understanding-volumes-docker/
 - http://container42.com/2014/11/18/data-only-container-madness/
 - http://stackoverflow.com/questions/25845785/most-appropriate-container-for-a-data-only-container
+
+##  Jenkins Docker Plug In
 
 ## Jenkins Docker Slave
 
