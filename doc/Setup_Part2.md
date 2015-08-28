@@ -16,7 +16,8 @@ The reasons are:
   than to create completely new images
 - Using the same base distribution simplifies the maintenance of the containers and images
 
-Debian distribution was chosen as base image because it is mentioned as good base image in the Docker documentation.
+Debian distribution was chosen as base image because it is mentioned as
+good base image in the Docker documentation.
 
 ##  Creating Jenkins Master Image
 Jenkins provides an official image at [Docker Hub](https://registry.hub.docker.com/_/jenkins/).
@@ -33,27 +34,31 @@ required packages and tools.
 The [official Dockerfile](https://github.com/jenkinsci/docker) was modified.
 To use less disk space the Jenkins image uses JRE instead of JDK.
 Consider to install a specific JRE version instead of the default one.
-This could also improve reproducable image createion.
+This could also improve the reproducibility of the created images.
 The modified Jenkins image will also inherit directly from Debian base image instead of the
 intermediate images.
 
-The created image size could even smaller if the binaries would not be downloaded in the Dockerfile
-but pre downloaded and added to the image with the `COPY` command.
-But this would lead into extra disk space for the pre downloaded binaries.
+The created Jenkins image size could be even smaller.
+When Docker creates the image with the Jenkins Dockerfile,
+some binaries are downloaded with curl.
+These resources could be pre downloaded and managed in a binary repository.
+In the Dockerfile the binaries could be added to the image with the `COPY` command.
+This would lead into extra disk space for the pre downloaded binaries.
+Also additional effort for the binary repository management would be required.
 
 The creation of this Dockerfile shows the difficulty to choose between maintainability,
 reproducibility, speed and size.
 
 ### Do not Install with Package Manager
-In the first approach the Docker file used Debian:jessie as base image and added the Jenkins repository
-as Debian package source.
+In the first approach the Docker file used Debian:jessie as base image and added
+the Jenkins repository as Debian package source.
 Afterwards Jenkins was installed with `apt-get install -y jenkins`.
 This approach leads into images that cannot be reproduced at some time.
 Whenever a new version between two executions of the Dockerfile is released,
 the images are created with different Jenkins versions.
 
-In the first draft of the Dockerfile it also installed `default-jre` with `apt-get`,
-this should also be changed to a specific java version.
+Currently the Dockerfile also installs `default-jre` with `apt-get`,
+this should also be changed to a specific java version for reproducible images.
 
 ### Minimize Modifications in Dockerfile
 The first approach used a completely new Dockerfile and removed everything that was not required.
@@ -63,7 +68,6 @@ official implementation as possible.
 This simplifies merging the changes to the own file.
 
 ##  Using Volume Container for Jenkins
-
 - Volume container must be created but not started
 - Volume container is referenced from Jenkins
 - If the volume container is removed, the Jenkins data is lost!
@@ -76,9 +80,12 @@ Why should a data container be created from a productive image instead of a smal
 
 See:
 
+- http://docs.docker.com/userguide/dockervolumes/
 - http://container-solutions.com/understanding-volumes-docker/
 - http://container42.com/2014/11/18/data-only-container-madness/
-- http://stackoverflow.com/questions/25845785/most-appropriate-container-for-a-data-only-container
+- http://container42.com/2013/12/16/persistent-volumes-with-docker-container-as-volume-pattern/
+- http://container42.com/2014/11/03/docker-indepth-volumes/
+- https://medium.com/@ramangupta/why-docker-data-containers-are-good-589b3c6c749e
 
 ##  Jenkins Docker Plug In
 
