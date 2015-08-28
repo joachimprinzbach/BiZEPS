@@ -6,7 +6,7 @@ On this page:
 
 <a name="p1_setupHost"/>
 #   Setup a Docker Host Machine
-To start with DockerCI first a host with a working Docker installation is required.
+To start with BiZEBS first a host with a working Docker installation is required.
 Currently Docker runs only on a Linux distribution and
 cannot be installed on Windows.
 But Docker can run within a VM with Linux on Windows.
@@ -74,4 +74,4 @@ Keep in mind to change the line ending format from Windows to Unix style when tr
 ##  Playing Around with Docker
 Now with Docker running and Putty SSH access its time to get familiar with docker.
 It makes sense to check out the "Hello World" examples and learn how to work with images and containers.
-Without any Docker experience it will be difficult to design and setup DockerCI.
+Without any Docker experience it will be difficult to design and setup BiZEBS.

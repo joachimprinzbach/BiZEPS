@@ -5,10 +5,10 @@ For best practices about Dockerfiles see:
 - http://jonathan.bergknoff.com/journal/building-good-docker-images
 
 ##  Use Debian as Base Image
-In the DockerCI environment requires multiple docker images to create containers from.
+In the BiZEBS environment requires multiple docker images to create containers from.
 Some of these containers will interact with each other and some have almost no associations
 to other containers.
-DockerCI should reuse the same base image (distribution) for as much images as possible.
+BiZEBS should reuse the same base image (distribution) for as much images as possible.
 The reasons are:
 
 - Dockers union file system and layering approach will lead in less disk usage
