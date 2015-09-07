@@ -1,3 +1,4 @@
+![logo](doc/Logo/BiZEPS_Logo_large.jpg)
 #   BiZEBS
 **Bi Zühlke Embedded Build System** for server and development PC (Bi)
 
