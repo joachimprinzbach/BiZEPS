@@ -1,5 +1,5 @@
 ![logo](doc/Logo/BiZEPS_Logo_small.png)
-#   BiZEBS
+
 **Bi Zühlke Embedded Build System** for server and development PC (Bi)
 
 ##  Project Status 28.08.2015
