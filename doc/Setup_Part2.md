@@ -67,10 +67,52 @@ But the maintenance of the Dockerfile would be better if the Dockerfile stays as
 official implementation as possible.
 This simplifies merging the changes to the own file.
 
-##  Using Volume Container for Jenkins
-- Volume container must be created but not started
-- Volume container is referenced from Jenkins
-- If the volume container is removed, the Jenkins data is lost!
+##  Using Volume Container for Jenkins Master
+Data containers can be used to separate the application from its data.
+For a Jenkins server in BiZEPS this makes sense.
+If a new Version of Jenkins is installed, a new Jenkins Master image has to be created.
+With a data container, the new Jenkins image can be tested with the runtime data from the previous version.
+The Jenkins settings, build jobs settings, users and also the installed plugins are stored in the data container.
+The Jenkins Master image contains only the Jenkins application.
+
+###	Docker Volumes
+When starting a container, the data is usually not persitent.
+Everything that is stored in a running container gets lost as soon as the container is removed.
+Docker volumes are addressing this issue.
+When a Docker container is started, a volume could be mapped.
+The `-v /path` option in `docker run` defines, that the volume exists outside of Dockers union file system.
+Docker will map the path to a directory on the host.
+The exact (container dependent) location on the host machine can be seen with `docker inspect <container>`.
+When files are added or modified in the specific host directory,
+the changes are also visible in the docker container that mounted this volume.
+
+When writing a Dockerfile, the `VOLLUME` command can be used.
+This has the same effect as starting the container with the `-v` option.
+
+###	Docker Data Only Container
+Docker allows to define data only containers that can be shared between multiple containers.
+A data only container is a Docker container only for data.
+The container have to be created from an image but must not be started.
+In BiZEPS the docker data only container is created with the command:
+
+`docker create --name dciJenkinsHome dci/voljenkins`
+
+The Jenkins Master container can use this volume with the docker command:
+
+`docker run --name dciJenkins --volumes-from dciJenkinsHome dci/jenkins`
+
+With the correct setup of the `dciJenkinsHome` container,
+the Jenkins data is encapsulated in the data container.
+This should simplify backup, restore and update strategy as also to share data between containers.
+
+Be aware, if the jenkins data container is deleted, the data is lost!
+
+###	Proper Data Only Container Setup
+To benefit from data only containers a proper setup is required.
+When a data only container is created, the base image is essential.
+To use a small base image to keep the image for the data container small is a bad idea.
+The used base image defines the containers file system.
+
 
 Why should a data container be created from a productive image instead of a small base such as scratch or busybox?
 
@@ -86,6 +128,8 @@ See:
 - http://container42.com/2013/12/16/persistent-volumes-with-docker-container-as-volume-pattern/
 - http://container42.com/2014/11/03/docker-indepth-volumes/
 - https://medium.com/@ramangupta/why-docker-data-containers-are-good-589b3c6c749e
+
+###	Backup and Restore with Volume Containers
 
 ##  Jenkins Docker Plug In
 
