@@ -1,9 +1,9 @@
 ![logo](doc/Logo/BiZEPS_Logo_small.png)
 
-**Bi Zühlke Embedded Build System** for server and development PC (Bi)
+**Zühlke Embedded Build System**
 
 ##  Project Status 28.08.2015
-- First draft of BiZEBS runs with **boot2docker on Windows**
+- First draft of BiZEPS runs with **boot2docker on Windows**
 - Docker Host API is currently not secured (Jenkins requires API access)
     * boot2docker on Windows secures the API by default, has to be disabled for first draft
 - Building the [jenkinsTrial](https://github.com/icebear8/jenkinsTrial) for Linux is possible
@@ -22,25 +22,25 @@
 - [DockerCI, one step by another](doc/Setup.md)
 
 #   Overview
-BiZEBS realizes the continuous integration build with Jenkins and Docker.
+BiZEPS realizes the continuous integration build with Jenkins and Docker.
 The Jenkins master runs in a docker container.
 For each build job, a Jenkins slave runs in its own container.
 Each tool chain is managed in its own docker image.
-BiZebs creates and manages its tool chain images with docker files.
+BiZEPS creates and manages its tool chain images with docker files.
 
-BiZebs has the vision to be used on the server as also on the local development machine.
+BiZEPS has the vision to be used on the server as also on the local development machine.
 The corresponding tool chain container could be used from the IDE to build (and run?) the source code.
 
-##  BiZEBS Advantages
+##  BiZEPS Advantages
 ### Separation of Tool Chains
 Every tool chain has its own container (virtual context) and runs independent from other containers.
 The installation of a new tool chain does not affect the current tool chains or the Jenkins server.
-BiZEBS is able to support all kind of tool chain in any version at the same time.
+BiZEPS is able to support all kind of tool chain in any version at the same time.
 
 ### Minimize Idle Resources
-In BiZEBS the Jenkins slaves are only active when there is a job running for their tool chain.
+In BiZEPS the Jenkins slaves are only active when there is a job running for their tool chain.
 They are not active (even not in idle mode), when they are not used.
-An idle BiZEBS Jenkins slave only uses disk space.
+An idle BiZEPS Jenkins slave only uses disk space.
 And even the used disk space is optimized due to Dockers union file system.
 
 ### Tool Chain Versions
@@ -53,13 +53,13 @@ As long as the images are on the Docker host or if they are pushed to the Docker
 the tags can be used to recover a previous image version.
 
 ### Application Updates
-To update an application in BiZEBS, the image of the corresponding container must be updated.
+To update an application in BiZEPS, the image of the corresponding container must be updated.
 The current container and the container from the updated image can concurrently run on the Docker Host.
 This means that an application update can be tested before the old container is replaced by the updated container.
 If the updated application container does not behave as expected, a roll back to the previous version can be done.
 
 ### Simple Distribution of the Development Environment
-If parts of BiZEBS could also be used on the development machine the developer
+If parts of BiZEPS could also be used on the development machine the developer
 would use the same environment as the build server.
 This means local builds would no more be affected by local installations (e.g. new version of a specific library).
 

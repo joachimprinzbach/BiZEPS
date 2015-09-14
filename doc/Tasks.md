@@ -3,7 +3,7 @@
 ##  Documentation
 boot2docker on OSX in Setup part one.
 
-## BiZEBS Security
+## BiZEPS Security
 **Acceptance Criteria:**
 Sensitive communication channels are secured
 
@@ -17,9 +17,9 @@ Sensitive communication channels are secured
     * How to create and distribute in DockerCI environment
     * Scripts?
 
-## BiZEBS at Amazon Cloud
+## BiZEPS at Amazon Cloud
 **Acceptance Criteria:**
-BiZEBS runs on Amazon AWS cloud
+BiZEPS runs on Amazon AWS cloud
 
 **Tasks**
 
@@ -69,38 +69,38 @@ The official Jenkins Dockerfile installs JDK, WGET and CURL which is not require
 - It should install a specific version to support recovery scenarios and all time history support
 - The official Jenkins image uses a zombie thread supervisor
 
-## BiZEBS Tool Chains
-- Define best practices for BiZEBS Dockerfiles
+## BiZEPS Tool Chains
+- Define best practices for BiZEPS Dockerfiles
     * The currently used Dockerfiles are installing the latest version of a tool
     * To enable tool chain versions and tracking, a Docker image should use specific versions of the tools
     * See official Jenkins Dockerfile which installs a specific Jenkins version
-- Create additional tool chains for BiZEBS (g++ for Windows, RasPi, Mono ...)
+- Create additional tool chains for BiZEPS (g++ for Windows, RasPi, Mono ...)
 
 https://registry.hub.docker.com/_/jenkins/
 
 https://github.com/jenkinsci/docker/tree/1f0d2b7d5b69aed1b0af7916ca46d35b249c1c86
 
-## Define BiZEBS Minimal Build Job Approach
-Currently BiZEBS depends on a Python script `/scripts/build.py` in the source repository.
-A BiZEBS build job simply executes this script.
+## Define BiZEPS Minimal Build Job Approach
+Currently BiZEPS depends on a Python script `/scripts/build.py` in the source repository.
+A BiZEPS build job simply executes this script.
 
 Check if this approach is handy enough to cover most of the tool chains.
 A more portable solution could be to call a simple shell script,
 the script could still call a python file from inside.
 The execution of a `Makefile` is not as reusable as the Shell or the Python script.
 
-## BiZEBS Image Management
+## BiZEPS Image Management
 - Define work flow for docker images with Dockerfiles
 - Specify docker image version management
 - How are new docker images created?
     * Would be nice if there would be a docker tool chain image similar to gcc/g++
-    * Not sure if it would be possible to release new docker images at BiZEBS
+    * Not sure if it would be possible to release new docker images at BiZEPS
     * If it is not working, use the 2nd docker plug-in to run docker commands on the host
     
 **Build in Docker Tool Chain:**
-BiZEBS could define an image whith Docker installed.
+BiZEPS could define an image whith Docker installed.
 This image could be used as the Docker tool chain to build docker images from Dockerfiles.
-This approach would match with the BiZEBS architecture and benefit from the BiZEBS advantages.
+This approach would match with the BiZEPS architecture and benefit from the BiZEPS advantages.
 The drawback of this solution is that the created docker images somehow have to be transferred to the docker host.
 
 **Build on Docker Host:**
@@ -110,13 +110,13 @@ Because the docker images are created on the Docker host they are immediately ac
 With appropriate build jobs Jenkins could build the images automatically and tag them as latest.
 This solution does not benefit from the separation of the applications.
 Its even worse because the build jobs are affecting the host directly
-and may corrupt the whole BiZEBS if used wrong.
+and may corrupt the whole BiZEPS if used wrong.
 The benefit is an automated tool chain deployment with good usability.
 
-## BiZEBS Meta Files
-Check the possibility, usability and benefit of a BiZEBS Meta file in the project source repository.
+## BiZEPS Meta Files
+Check the possibility, usability and benefit of a BiZEPS Meta file in the project source repository.
 The Meta file could define which build job (Docker image tool chain) at which version should be executed.
 This could minimize the management effort in the Jenkins build job GUI.
 
-## BiZEBS at Development Machine
-Concept for BiZEBS for a single seat developer. How to integrate with IDE?
+## BiZEPS at Development Machine
+Concept for BiZEPS for a single seat developer. How to integrate with IDE?
