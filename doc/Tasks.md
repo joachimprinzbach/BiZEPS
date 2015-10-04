@@ -26,6 +26,16 @@ BiZEPS runs on Amazon AWS cloud
 - Install script for Docker at AWS cloud
 - Setup and test DockerCI at cloud
 
+## BiZEPS Jenkins Login with public/private key
+- Try to login with key pair instead of password
+- Jenkins on Amazon is public to anyone in the world!
+
+## BiZEPS Slaves at Amazon Cloud
+- Use a micro instance for the master server (slow, cheap)
+- Try to start the Docker slaves on other instances (fast, more expensive)
+- Master should run 24 hours, slaves will run shortely
+- Amazon pricing is per hour
+
 ##  Issue: Docker Volume
 **Dependencies:**
 If the Jenkins volume image (and the created container) are depending from the Jenkins image,
