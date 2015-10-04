@@ -20,4 +20,4 @@ RUN echo "jenkins:jenkins" | chpasswd
 # Standard SSH port
 EXPOSE 22
 
-CMD ["/usr/sbin/sshd"]
+CMD ["/usr/sbin/sshd", "-d"]
