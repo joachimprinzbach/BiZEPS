@@ -10,12 +10,47 @@ To start with BiZEPS first a host with a working Docker installation is required
 Currently Docker runs only on a Linux distribution and
 cannot be installed on Windows.
 But Docker can run within a VM with Linux on Windows.
-This is where boot2docker is used.
-
-On the long run boo2docker will probably be replaced by [docker machine](https://docs.docker.com/machine/).
+This is where the docker toolbox is used.
+The docker toolbox has replaced boot2docker.
 
 <a name="p1_windows"/>
-#   boot2docker on Windows
+#   Docker Toolbox
+- [Docker Toolbox](https://github.com/docker/toolbox)
+- [Insallation on Windows](https://docs.docker.com/windows/step_one/)
+
+##  Installer
+The installer adds shortcuts to the start menu.
+Use 'Docker Quickstart Terminal' to start the docker VM.
+At the first start, the VM is created and set up.
+
+##  Docker and Putty
+IP: Is printed in the welcome message when the docker terminal (VM) is started.
+User: Docker
+Password: tcuser
+
+Or with RSA Keys:
+`docker@192.168.99.100:22`  
+Use the key from `%USERPROFILE%\.docker\machine\machines\<machine name>\`
+
+### Official Documentation
+After installing and starting the docker machine it was not possible
+to connect with putty as explained in the official documentation.
+The referenced IP and the RSA settings did not worked.
+
+### The Docker Machine IPs
+Putty could not connect with `docker@127.0.0.1` as mentioned in the documentation.
+But when starting the Docker terminal (VM) the IP of the machine is printed.
+For example the connection with `docker@192.168.99.100` was possible.
+The default password is `tcuser`.
+
+### The Docker Machine RSA Keys
+As described in the Docker documentation,
+the RSA key is located at `%USERPROFILE%\.docker\machine\machines\<machine name>\`.
+Keep in mind to modify the key with `puttygen` to make it usable for putty.
+The ssh port mentioned in the documentation does not work.
+Use the standard `port 22` also for connection with RSA keys (instead of `2022`).
+
+#   boot2docker on Windows (Legacy)
 - [boot2docker](https://github.com/boot2docker)
 - [Installation on Windows](https://docs.docker.com/installation/windows/)
 
