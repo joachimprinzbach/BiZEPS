@@ -16,10 +16,9 @@
     * Jenkins Slave
     * GCC Slave
 
-#   References
-
+#   Documentation
 - [Backlog](doc/Tasks.md)
-- [DockerCI, one step by another](doc/Setup.md)
+- [BiZEPS setup, one step by another](doc/Setup.md)
 
 #   Overview
 BiZEPS realizes the continuous integration build with Jenkins and Docker.

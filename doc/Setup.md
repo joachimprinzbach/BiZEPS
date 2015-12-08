@@ -1,7 +1,7 @@
-#   Building DockerCI
-This section describes how DockerCI is realized as a step by step documentation.
+#   Building BiZEPS
+This section describes how BiZEPS is realized as a step by step documentation.
 The documentation reflects the current system state and should not be written in diary style.
-If a part in DockerCI is changed the corresponding step should be updated.
+If a part in BiZEPS is changed the corresponding step should be updated.
 The reason why the previous implementation is insufficient should also be documented.
 
 **Reason:**
