@@ -11,7 +11,7 @@
 #   What Next?
 - Sources available on Stash
 - Soon available on Zuehlke open source project space (Github)
-- All that are setting up a tool chain are invited to contribute
+- All who are setting up a tool chain are invited to contribute
 - BiZEPS needs ready to use tool chains!
 - Define the BiZEPS build approach
   - No build information in the build job => not in VCS
@@ -27,7 +27,7 @@
   - Generate VMs for the Docker host
 - Docker releases
   - Can images be reused with a new Docker deamon version?
-- Private Docker repository not available
+- Private Docker repository currently not yet available @Zuehlke
   - Setup a private repository
   - Go for open source, push the repositories to Docker hub
 - Docker vs. Rocket
