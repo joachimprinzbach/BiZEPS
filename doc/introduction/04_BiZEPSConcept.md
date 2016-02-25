@@ -14,19 +14,47 @@
   - Easier than uninstalling a tool from the server (with dependencies)
 
 ##  BiZEPS Images
-```
+A repository of tools and chains, ready to use
 
-Tool image      Jenkins image
+- Base Image Debian:Jessie
+  - Jenkins Master with JRE, Jenkins and Git
+  - Jenkins Slave with JRE, Python, SSH Server
+    - Doxygen Slave
+    - GCC 4.8 Slave
+    - GCC 4.9 Slave
+      - Google test
+      - CPP unit
+      - Boost unit tests
+  - TeamCity Master
+  - TeamCity Slave
+  - ...
 
-Base image
-
-Deamon
-
-Host
-
-```
 ##  BiZEPS Container Architecture
-
+```
+Containers
+                  +---SSH----------+-------------+
+                  |                |             |
+                  |                v             v
+            +-----+------+    +----+---+    +----+----+
+            | Jenkins    |    | GCC    |    | Doxygen |
+            | Container  |    | Slave  |    | Slave   |
+            |            |    |        |    |         |
+            +------*-----+    +--------+    +---------+
+                   *
+                   ***HTTP************
+                                     *
++---------------+--------------------*----------------+
+|               |                    *                |
+| Docker deamon | Virtual Network    *                |
+|               |                    *                |
++---------------+--------------------*----------------+
+|                                    *                |
+| Docker Host                        *                |
+|                                    *                |
++------------------------------------*----------------+
+                                     *
+                                     X
+```
 
 #  What's Next?
-[What is docker?](05_BiZEPSUseCases.md)
+[Interesting use cases](05_BiZEPSUseCases.md)

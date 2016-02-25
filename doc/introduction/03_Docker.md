@@ -49,16 +49,45 @@
 ##  Distributing Images
 - The docker environment provides a repository
 - Distribute pre built imaages
+- Each image has a revision
 - Public and private repositories
 
 ```
-                        +----------------+
-                        v                |
-Dockerfile ----> Docker image ----> Repository---------> other machine ----> container
-
-
-
++------------\    +-----------\
+|             \   |            \
+| Dockerfile  |   | Dockerfile |
+| Jenkins     |   | GCC        |
+|             |   |            |
++-----+-------+   +-----+------+
+      |                 |
+      v                 v
++----------------------------+             +---------------------------+
+|                            |             |                           |
+|  Docker Image Repository   |             | Server    +------------+  |
+|                            |             |           | Container  |  |
+|  +-------------------+     |             |           | GCC        |  |
+|  |                   |     |             |           |            |  |
+|  | Image GCC V1      |     |             |           +------------+  |
+|  |                   |-+   |             |                           |
+|  +-+-----------------+ |   |             | +-----------+             |
+|    | Image GCC V2      |   |             | |           |             |
+|    |                   |   |             | | Container |             |
+|    +-------------------+   |             | | Jenkins   |             |
+|                            +------+      | |           |             |
+|                            |      |      | +-----------+             |
+|                            |      |      |                           |
+|                            |      |      +---------------------------+
+|                            |      |      |                           |
+|                            |      |      | +------------+ +--------+ |
+|  +-------------------+     |      |      | |            | |        | |
+|  |                   |     |      |      | | Image      | | Image  | |
+|  | Image Jenkins V1  |     |      +----->+ | Jenkins V1 | | GCC V2 | |
+|  |                   |     |             | |            | |        | |
+|  +-------------------+     |             | +------------+ +--------+ |
+|                            |             | Local Image Repo          |
+|                            |             |                           |
++----------------------------+             +---------------------------+
 ```
 
 #  What's Next?
-[What is docker?](04_BiZEPSConcept.md)
+[The concept of BiZEPS](04_BiZEPSConcept.md)

@@ -20,3 +20,6 @@
 
 ##  Scalability
 - Let slave containers run on other hosts
+
+#  What's Next?
+[Current project state](06_BiZEPSState.md)
