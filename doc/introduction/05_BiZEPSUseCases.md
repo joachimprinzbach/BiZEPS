@@ -13,7 +13,7 @@
 - Each tool chain has its own virtual environment
 - No conflicts between different tools and versions
 
-##  Use BiZESP on Development Machine
+##  Use BiZEPS on Development Machine
 - No local installation of the tool chain
   - Just get the images from the Docker repository
 - Use the same containers as the build server uses
