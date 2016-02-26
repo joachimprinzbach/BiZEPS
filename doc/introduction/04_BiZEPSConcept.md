@@ -12,6 +12,7 @@
 - Outdated Tools
   - Remove the container
   - Easier than uninstalling a tool from the server (with dependencies)
+- Docker images can be built by the server
 
 ##  BiZEPS Images
 A repository of tools and chains, ready to use
@@ -49,7 +50,7 @@ Containers
 |               |                    *                |
 +---------------+--------------------*----------------+
 |                                    *                |
-| Docker Host                        *                |
+| Docker Host (VM, AWS ...)          *                |
 |                                    *                |
 +------------------------------------*----------------+
                                      *
