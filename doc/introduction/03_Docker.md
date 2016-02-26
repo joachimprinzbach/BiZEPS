@@ -27,7 +27,7 @@
 - A container is an instance of an image
 - An image contains the 'installed tools'
 - Images may be layered
-- An image can be described in a doxyfile (installation script)
+- An image can be described in a Docker file (installation script)
 
 ```
 +---------------+  +---------------+  +---------------+
@@ -48,7 +48,7 @@
 
 ##  Distributing Images
 - The docker environment provides a repository
-- Distribute pre built imaages
+- Distribute pre built images
 - Each image has a revision
 - Public and private repositories
 
