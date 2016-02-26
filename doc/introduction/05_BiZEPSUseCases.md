@@ -30,13 +30,16 @@
 - Allows to run any build system version at any time
 
 ##  Continuous Integration of Build System
-- Create a new image with the update
-- Define a 'latest' build system base line (not released)
+- Create a new image with some changes
+  - New tool
+  - New version
+  - ...
+- Define a 'latest' build system base line (not yet released)
 - Generate the 'latest' images from the 'latest' base line
 - Start the 'latest' containers on the server
 - Build with the 'latest' build system for test purposes
 - Keep the currently released base line running in parallel for your daly business
-- If the 'latest' base line is stable => release it
+- If the 'latest' base line is stable: release it
 
 ##  Scalability
 - Let all containers run on a single server (or development machine)

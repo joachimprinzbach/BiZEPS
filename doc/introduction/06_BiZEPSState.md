@@ -2,7 +2,7 @@
 
 #   Current State of BiZEPS
 - Basic setup is up and running
-  - Docker images can be generated out of Dockerfiles
+  - Docker images can be generated from Dockerfiles
   - BiZEPS can be started with a script
   - Jenkins master and slave is running
   - HelloWorld.c from Github is compiling
@@ -15,10 +15,11 @@
 - BiZEPS needs ready to use tool chains!
 - Define the BiZEPS build approach
   - make, cmake ...?
-  - No build information in the build job => not in VCS
-  - Meta file for parametrized builds?
+  - Do not manage build information in the build job description
+  - Add build related information to VCS
+  - Meta files for parametrized builds?
 - Build the Docker images on the build server
-- Strategy for continuous deployment of the build server
+- Strategy for continuous deployment of the build system
 
 #   Open Issues
 - Currently no Windows containers possible
