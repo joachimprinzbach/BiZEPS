@@ -16,11 +16,11 @@
 ##  Use BiZEPS on Development Machine
 - No local installation of the tool chain
   - Just get the images from the Docker repository
+  - No difference to the build server tool chain
+    - Libraries
+    - Toolchain
+    - OS
 - Use the same containers as the build server uses
-- No local installation that is different than the build servers installation
-  - Libraries
-  - Toolchain
-  - OS
 - Simplified update of the developer machine tool chains
 
 ##  Build System Base Lines (Versions)
