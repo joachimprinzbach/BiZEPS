@@ -19,6 +19,7 @@ There is an error with `Setting up ca-certificates-java` when trying to create i
     * GCC Slave
 
 #   Documentation
+- [What is BiZEPS](doc/introduction/01_BiZEPS_Introduction.md)
 - [Backlog](doc/Tasks.md)
 - [BiZEPS setup, one step by another](doc/Setup.md)
 
@@ -154,6 +155,3 @@ The image of a generic slave depends on the base Debian Jessie image and install
 Is based on dci/jenkinsslave and installs:
 
 - g++
-
-
-
