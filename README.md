@@ -68,7 +68,31 @@ This means local builds would no more be affected by local installations (e.g. n
 The tool chain update could be provided in the same way as for the build server.
 
 ## Architecture
-![DockerCI Overview](doc/Images/DockerCI_Overview.jpg "DockerCI overview")
+```
+Containers
+                  +---SSH----------+-------------+
+                  |                |             |
+                  |                v             v
+            +-----+------+    +----+---+    +----+----+
+            | Jenkins    |    | GCC    |    | Doxygen |
+            | Container  |    | Slave  |    | Slave   |
+            |            |    |        |    |         |
+            +------*-----+    +--------+    +---------+
+                   *
+                   ***HTTP************
+                                     *
++---------------+--------------------*----------------+
+|               |                    *                |
+| Docker deamon | Virtual Network    *                |
+|               |                    *                |
++---------------+--------------------*----------------+
+|                                    *                |
+| Docker Host (VM, AWS ...)          *                |
+|                                    *                |
++------------------------------------*----------------+
+                                     *
+                                     X
+```
 
 ### Docker Host
 The docker host is a Linux distribution with Docker installed.
