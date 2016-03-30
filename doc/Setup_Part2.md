@@ -133,14 +133,40 @@ See:
 
 ##  Jenkins Docker Plug In
 
-## Jenkins Docker Slave
+### Disable TLS
+Disable TLS verification for docker deamon (test purpose only).
+**It is strongly not recommended to disable this socket encryption!**
+Doing so is a massive security risk because the socket is accessible from everywhere in the network.
+But for testing purpose it may be useful to temporary deactivate the docker port encryption.
+This can be done with the entry `DOCKER_TLS=no` in the `/var/lib/boot2docker/profile` file.
 
+After modifying the `profile`, the docker engine has to be restarted.
+- Stop all running containers
+- In the boot2docker shell type
+  - `docker-machine stop default`
+  - `docker-machine start default`
+  - `default` ist the current docker machines instance name
+  - The machine name can be printed with the command `docker-machine active`
+
+### Docker Plug In
+- https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin
+- `Configure System/Cloud`
+  - Add new docker cloud
+  - Docker URL of local host (http://172.17.42.1:2376)
+  - Add new Template
+    - Docker Image: `dci/jenkinsslave`
+    - Label: `dci-slave`
+    - Add Cridentials: `jenkins`, `jenkins`
+- Create new job
+  - Freestyle project
+  - Restrict where this project can run
+  - Set label from Docker cloud template `dci-slave`
+
+## Jenkins Docker Slave
 Use the Jenkins plug in to manage Jenkins Docker slaves.
 The docker plug in starts a Docker container from a specific image and
 runs the Jenkins slave in that container.
 After the build step, the Docker container is removed again.
 The Docker Jenkins slave image requires JRE and an SSH server.
-
-https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin
 
 https://registry.hub.docker.com/u/evarga/jenkins-slave/dockerfile/
