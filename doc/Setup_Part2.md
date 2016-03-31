@@ -148,9 +148,6 @@ After modifying the `profile`, the docker engine has to be restarted.
   - `default` ist the current docker machines instance name
   - The machine name can be printed with the command `docker-machine active`
   
-On the AWS cloud, the docker startup behavior can be configured with the file
-`/etc/sysconfig/docker`.
-
 ### Docker Plug In
 - https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin
 - `Configure System/Cloud`

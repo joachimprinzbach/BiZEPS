@@ -10,8 +10,8 @@ Sensitive communication channels are secured
 **Tasks**
 
 - Use certificates to authenticate Jenkins Docker Plugin at the Docker API port
-    * Reason: An unsecured docker port is a massive security issue.
-  Attackers can gain root access, the port is public
+    * Reason: An unsecured docker port is a massive security issue
+    * Attackers can gain root access, the port is public
 - Use public private key pairs to identify Jenkins master at its slaves (ssh)
 - Define certificate and key management
     * How to create and distribute in DockerCI environment
