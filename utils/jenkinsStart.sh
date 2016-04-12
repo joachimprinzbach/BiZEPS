@@ -9,5 +9,6 @@ docker create --name dciJenkinsHome dci/voljenkins
 # -p for linked port on the host
 # --name of the container
 # --volumes-from container with the volumes to mount
+# -v to mount the docker deamon api unix socket
 # and dci/jenkins is the image to be used
-docker run -d -p 8080:8080 --name dciJenkins --volumes-from dciJenkinsHome dci/jenkins
+docker run -d -p 8080:8080 --name dciJenkins --volumes-from dciJenkinsHome -v /var/run/docker.sock:/var/run/docker.sock dci/jenkins
