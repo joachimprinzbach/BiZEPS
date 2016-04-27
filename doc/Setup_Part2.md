@@ -133,26 +133,11 @@ See:
 
 ##  Jenkins Docker Plug In
 
-### Disable TLS
-Disable TLS verification for docker deamon (test purpose only).
-**It is strongly not recommended to disable this socket encryption!**
-Doing so is a massive security risk because the socket is accessible from everywhere in the network.
-But for testing purpose it may be useful to temporary deactivate the docker port encryption.
-This can be done with the entry `DOCKER_TLS=no` in the `/var/lib/boot2docker/profile` file.
-
-After modifying the `profile`, the docker engine has to be restarted.
-- Stop all running containers
-- In the boot2docker shell type
-  - `docker-machine stop default`
-  - `docker-machine start default`
-  - `default` ist the current docker machines instance name
-  - The machine name can be printed with the command `docker-machine active`
-  
-### Docker Plug In
 - https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin
 - `Configure System/Cloud`
   - Add new docker cloud
-  - Docker URL of local host (http://172.17.42.1:2376)
+  - Docker URL: Add the connection URL to the docker API (unix:///var/run/docker.sock)
+    - The unix socket is mounted into the container (`-v /var/run/docker.sock:/var/run/docker.sock`)
   - Add new Template
     - Docker Image: `dci/jenkinsslave`
     - Label: `dci-slave`
@@ -161,7 +146,7 @@ After modifying the `profile`, the docker engine has to be restarted.
   - Freestyle project
   - Restrict where this project can run
   - Set label from Docker cloud template `dci-slave`
-
+  
 ## Jenkins Docker Slave
 Use the Jenkins plug in to manage Jenkins Docker slaves.
 The docker plug in starts a Docker container from a specific image and

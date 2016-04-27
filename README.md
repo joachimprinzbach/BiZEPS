@@ -2,12 +2,9 @@
 
 **Zühlke Embedded Build System**
 
-##  Project Status 8.12.2015
-**Important:** If using Docker-Tools on Windows, use the Docker-Tools **V1.8.3**, V1.9.1 did not work.
-There is an error with `Setting up ca-certificates-java` when trying to create images with V1.9.1.
-
-- First draft of BiZEPS runs with **Docker-Tools on Windows**
-- BiZEPS runs on Docker-Tools (V1.8.1) and on the Amazon Cloud.
+##  Project Status 27. April 2016
+- First draft of BiZEPS runs with **Docker Toolbox on Windows**, V1.10.3
+- BiZEPS runs on the Amazon Cloud.
 - Building the [jenkinsTrial](https://github.com/icebear8/jenkinsTrial) for Linux is possible
     * git hub
     * python
