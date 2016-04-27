@@ -113,7 +113,6 @@ When a data only container is created, the base image is essential.
 To use a small base image to keep the image for the data container small is a bad idea.
 The used base image defines the containers file system.
 
-
 Why should a data container be created from a productive image instead of a small base such as scratch or busybox?
 
 - It will not take more disk space, because of the Docker image layer characteristics 
@@ -130,8 +129,10 @@ See:
 - https://medium.com/@ramangupta/why-docker-data-containers-are-good-589b3c6c749e
 
 ###	Backup and Restore with Volume Containers
+**TODO**
 
 ##  Jenkins Docker Plug In
+The current docker image built with BiZEPS will already contain the required docker plugin for Jenkins.
 
 - https://wiki.jenkins-ci.org/display/JENKINS/Docker+Plugin
 - `Configure System/Cloud`

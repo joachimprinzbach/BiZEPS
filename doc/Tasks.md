@@ -17,15 +17,6 @@ Sensitive communication channels are secured
     * How to create and distribute in DockerCI environment
     * Scripts?
 
-## BiZEPS at Amazon Cloud
-**Acceptance Criteria:**
-BiZEPS runs on Amazon AWS cloud
-
-**Tasks**
-
-- Install script for Docker at AWS cloud
-- Setup and test DockerCI at cloud
-
 ## BiZEPS Jenkins Login with public/private key
 - Try to login with key pair instead of password
 - Jenkins on Amazon is public to anyone in the world!
@@ -66,8 +57,8 @@ maybe this UID should be reused for the volumes?
 ## Jenkins Master Image
 ###  Initialization
 - Update Jenkins plug ins automatically from Dockerfile or at first startup
-- Install required Jenkins Docker plug ins from Dockerfile or at first startup
 - Secure Jenkins (User and Password)
+- Done: Install required Jenkins Docker plug ins from Dockerfile or at first startup
 
 ###  Keep Close to Official Jenkins Dockerfile
 Consider to modify current dci/jenkins Dockerfile to be similar to the official Jenkins Dockerfile.

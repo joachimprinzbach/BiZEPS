@@ -50,7 +50,7 @@ Keep in mind to modify the key with `puttygen` to make it usable for putty.
 The ssh port mentioned in the documentation does not work.
 Use the standard `port 22` also for connection with RSA keys (instead of `2022`).
 
-#   boot2docker on Windows (Legacy)
+#   OBSOLETE: boot2docker on Windows
 - [boot2docker](https://github.com/boot2docker)
 - [Installation on Windows](https://docs.docker.com/installation/windows/)
 
