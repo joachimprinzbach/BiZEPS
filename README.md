@@ -19,6 +19,7 @@
 #   Documentation
 - [What is BiZEPS](doc/introduction/01_BiZEPS_Introduction.md)
 - [Backlog](doc/Tasks.md)
+- [Quick start guide](doc/QuickStartGuide.md)
 - [BiZEPS setup, one step by another](doc/Setup.md)
 
 #   Overview
