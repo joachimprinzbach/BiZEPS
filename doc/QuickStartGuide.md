@@ -72,6 +72,7 @@ select `dci-slave` as `Label Expression`.
 In the section `Build` click `Add build step`, select `Execute shell` and
 write a test command into the text box.
 For example `echo "Hello BiZEPS"`.
+
 ![Job Configuration](Images/DockerPlugin_04.jpg)
 
 ##  Enjoy
