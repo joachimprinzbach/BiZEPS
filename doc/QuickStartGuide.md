@@ -21,6 +21,7 @@ If you have issues with starting the 'Docker Quickstart Terminal' you can try se
 
 ##  Prepare BiZEPS
 Once you have a Docker installation running, you have to clone the BiZEPS repository.
+Execute the following commands in the Docker Quickstart Terminal.
 
 - Create a directory where you want to clone the project
   - `mkdir dev`
