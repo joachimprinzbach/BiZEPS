@@ -3,12 +3,14 @@ MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 #See: https://registry.hub.docker.com/u/evarga/jenkins-slave
 
-RUN apt-get update && apt-get install -y default-jre
-RUN apt-get update && apt-get install -y python
-RUN apt-get update && apt-get install -y git
+RUN apt-get update && apt-get install -y \
+  default-jre \
+  git \
+  openssh-server \
+  python \
+  && rm -rf /var/lib/apt/lists/*
 
-# Install a basic SSH server
-RUN apt-get update && apt-get install -y openssh-server
+# Setup a basic SSH server
 RUN sed -i 's|session    required     pam_loginuid.so|session    optional     pam_loginuid.so|g' /etc/pam.d/sshd
 RUN mkdir -p /var/run/sshd
 
