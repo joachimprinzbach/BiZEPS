@@ -21,4 +21,7 @@ COPY ./workspace/arm-bcm2708/${X_TOOLCHAIN64}/ ${TOOLCHAIN_DIR}${X_TOOLCHAIN64}/
 
 VOLUME /development
 
+USER root
 CMD ["/usr/sbin/sshd", "-D"]
+
+USER jenkins

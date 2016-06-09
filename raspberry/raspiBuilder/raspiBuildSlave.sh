@@ -4,7 +4,7 @@
 # This keeps the generated docker image smaller
 echo
 echo "PREPARE: Download resources for docker image"
-echo "-----------------------------------"
+echo "--------------------------------------------"
 git clone git://github.com/raspberrypi/tools.git --depth 1 ./src
 mkdir -p ./Dockerfiles/workspace/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/
 cp -rf ./src/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/ ./Dockerfiles/workspace/arm-bcm2708/
@@ -13,13 +13,13 @@ cp -rf ./src/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/ ./Dockerfi
 # -t defines the name for the created images
 echo
 echo "EXECUTE: Create docker image"
-echo "-------------------"
+echo "----------------------------"
 docker build -t biz/raspislave ./Dockerfiles
 
 # Remove the resources from the host after the docker image has been built
 echo
 echo "WRAP UP: Remove no more used resources"
-echo "-----------------------------"
+echo "--------------------------------------"
 rm -rf ./src
 rm -rf ./Dockerfiles/workspace
 
