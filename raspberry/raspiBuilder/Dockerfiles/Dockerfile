@@ -19,8 +19,8 @@ COPY ./workspace/arm-bcm2708/${X_TOOLCHAIN64}/ ${TOOLCHAIN_DIR}${X_TOOLCHAIN64}/
 
 # Export common environment variables
 RUN touch /development/vars.env
-RUN echo export CC arm-linux-gnueabihf-gcc >> /development/vars.env
-RUN echo export CXX arm-linux-gnueabihf-g++ >> /development/vars.env
+RUN echo export CC=arm-linux-gnueabihf-gcc >> /development/vars.env
+RUN echo export CXX=arm-linux-gnueabihf-g++ >> /development/vars.env
 
 VOLUME /development
 
