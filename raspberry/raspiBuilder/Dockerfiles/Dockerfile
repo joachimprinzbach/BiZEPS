@@ -11,13 +11,17 @@ RUN chown -R jenkins /development
 
 USER jenkins
 
+# Install cross toolchain to specified tool chain directory
 ENV X_TOOLCHAIN64 gcc-linaro-arm-linux-gnueabihf-raspbian-x64
 ENV TOOLCHAIN_DIR /development/toolChains/
 ENV PATH ${TOOLCHAIN_DIR}${X_TOOLCHAIN64}/bin/:${PATH}
-  
-# Install cross toolchain to specified tool chain directory
+
 RUN mkdir -p $TOOLCHAIN_DIR
 COPY ./workspace/arm-bcm2708/${X_TOOLCHAIN64}/ ${TOOLCHAIN_DIR}${X_TOOLCHAIN64}/
+
+# Export common environment variables
+ENV CC arm-linux-gnueabihf-gcc
+ENV CXX arm-linux-gnueabihf-g++
 
 VOLUME /development
 
