@@ -2,7 +2,7 @@
 
 # Clone the project on the host and not within the dockerfile
 # This keeps the generated docker image smaller
-if false; then
+if true; then
   echo
   echo "PREPARE: Download resources for docker image"
   echo "--------------------------------------------"
@@ -19,7 +19,7 @@ echo "----------------------------"
 docker build -t biz/raspislave ./Dockerfiles
 
 # Remove the resources from the host after the docker image has been built
-if false; then
+if true; then
   echo
   echo "WRAP UP: Remove no more used resources"
   echo "--------------------------------------"
