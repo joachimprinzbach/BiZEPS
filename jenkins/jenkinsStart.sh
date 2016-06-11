@@ -2,7 +2,7 @@
 
 # Creates a volume container for the jenkins server with the specified name
 # The volume container has not to be started
-docker create --name dciJenkinsHome dci/voljenkins
+docker create --name bizJenkinsHome biz/voljenkins
 
 # Creates and starts the Jenkins master container
 # -d for dispatched mode (run in background)
@@ -11,4 +11,4 @@ docker create --name dciJenkinsHome dci/voljenkins
 # --volumes-from container with the volumes to mount
 # -v to mount the docker deamon api unix socket
 # and dci/jenkins is the image to be used
-docker run -d -p 8080:8080 --name dciJenkins --volumes-from dciJenkinsHome -v /var/run/docker.sock:/var/run/docker.sock dci/jenkins
+docker run -d -p 8080:8080 --name bizJenkins --volumes-from bizJenkinsHome -v /var/run/docker.sock:/var/run/docker.sock biz/jenkins
