@@ -2,19 +2,7 @@
 
 **Zühlke Embedded Build System**
 
-##  Project Status 27. April 2016
-- First draft of BiZEPS runs with **Docker Toolbox on Windows**
-- BiZEPS is tested with Docker V1.8.3, 1.10.3, 1.11.0 (NOT working with 1.9.1)
-- BiZEPS runs on the Amazon Cloud.
-- Building the [jenkinsTrial](https://github.com/icebear8/jenkinsTrial) for Linux is possible
-    * git hub
-    * python
-    * g++
-- Dockerfiles are available for
-    * Jenkins (required docker plugin already installed)
-    * Jenkins Volume
-    * Jenkins Slave
-    * GCC Slave
+[Release notes](ReleaseNotes.md)
 
 #   Documentation
 - [What is BiZEPS](doc/introduction/01_BiZEPS_Introduction.md)
