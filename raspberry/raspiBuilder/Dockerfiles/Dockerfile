@@ -18,6 +18,11 @@ RUN mkdir -p $TOOLCHAIN_DIR
 COPY ./workspace/arm-bcm2708/${X_TOOLCHAIN64}/ ${TOOLCHAIN_DIR}${X_TOOLCHAIN64}/
 
 # Export common environment variables
+# Export common environment variables
+ENV PATH ${TOOLCHAIN_DIR}${X_TOOLCHAIN64}/bin/:${PATH}
+ENV CC arm-linux-gnueabihf-gcc
+ENV CXX arm-linux-gnueabihf-g++
+
 RUN touch /development/vars.env
 RUN echo export PATH=${TOOLCHAIN_DIR}${X_TOOLCHAIN64}/bin/:${PATH} >> ${VAR_FILE}
 RUN echo export CC=arm-linux-gnueabihf-gcc >> ${VAR_FILE}
