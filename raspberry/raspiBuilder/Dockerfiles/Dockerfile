@@ -1,33 +1,50 @@
 FROM biz/jenkinsslave
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
+# Arguments during the docker build
+ARG REPO_URL=git://github.com/raspberrypi/tools.git
+ARG X_TOOLCHAIN=gcc-linaro-arm-linux-gnueabihf-raspbian-x64
+ARG TOOL_CHAIN_REL_PATH=arm-bcm2708/${X_TOOLCHAIN}
+ARG REPO_DIR=/workspace
+ARG INSTALL_PATH=/development
+ARG TOOL_CHAIN_PATH=${INSTALL_PATH}/toolChain
+ARG VAR_FILE=${INSTALL_PATH}/vars.env
+
+# Environment variables for the image
+ENV PATH ${TOOL_CHAIN_PATH}/${X_TOOLCHAIN}/bin:${PATH}
+ENV CC arm-linux-gnueabihf-gcc
+ENV CXX arm-linux-gnueabihf-g++
+
 RUN apt-get update && apt-get install -y \
   cmake \
   make \
   && rm -rf /var/lib/apt/lists/*
   
-RUN mkdir /development
-RUN chown -R jenkins /development
+RUN mkdir ${INSTALL_PATH}
+RUN chown -R jenkins ${INSTALL_PATH}
 
 # Install cross toolchain to specified tool chain directory
-ENV X_TOOLCHAIN64 gcc-linaro-arm-linux-gnueabihf-raspbian-x64
-ENV TOOLCHAIN_DIR /development/toolChain/
-ENV VAR_FILE /development/vars.env
+# Keep disk space during docker build process small
+# Fetch from git repo, only fetch one commit and checkout only required folder
+RUN mkdir -p ${TOOL_CHAIN_PATH}
+RUN mkdir -p ${REPO_DIR} && \
+    cd ${REPO_DIR} && \
+    git init && \
+    git remote add origin ${REPO_URL} && \
+    git fetch origin --depth 1 && \
+    git config core.sparseCheckout true && \
+    echo ${TOOL_CHAIN_REL_PATH} >> .git/info/sparse-checkout && \
+    git checkout master && \
+    mv -f ./${TOOL_CHAIN_REL_PATH} ${TOOL_CHAIN_PATH} && \
+    cd / && \
+    rm -rf ${REPO_DIR}
 
-RUN mkdir -p $TOOLCHAIN_DIR
-COPY ./workspace/ ${TOOLCHAIN_DIR}
+# Export common environment variables to file
+RUN touch ${VAR_FILE}
+RUN echo export PATH=${PATH} >> ${VAR_FILE}
+RUN echo export CC=${CC} >> ${VAR_FILE}
+RUN echo export CXX=${CXX} >> ${VAR_FILE}
 
-# Export common environment variables
-# Export common environment variables
-ENV PATH ${TOOLCHAIN_DIR}${X_TOOLCHAIN64}/bin:${PATH}
-ENV CC arm-linux-gnueabihf-gcc
-ENV CXX arm-linux-gnueabihf-g++
-
-RUN touch /development/vars.env
-RUN echo export PATH=${TOOLCHAIN_DIR}${X_TOOLCHAIN64}/bin/:${PATH} >> ${VAR_FILE}
-RUN echo export CC=arm-linux-gnueabihf-gcc >> ${VAR_FILE}
-RUN echo export CXX=arm-linux-gnueabihf-g++ >> ${VAR_FILE}
-
-VOLUME /development
+VOLUME ${INSTALL_PATH}
 
 CMD ["/usr/sbin/sshd", "-D"]
