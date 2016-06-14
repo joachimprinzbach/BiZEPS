@@ -16,17 +16,17 @@ ENV VAR_FILE /development/vars.env
 ENV TOOLCHAIN_REL_SRC_DIR=arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64
 
 RUN mkdir -p ${TOOLCHAIN_DIR}
-RUN mkdir -p ${TOOLCHAIN_DIR}src/ &&
-    cd ${TOOLCHAIN_DIR}src &&
-    git init &&
-    git remote add origin git://github.com/raspberrypi/tools.git &&
-    git fetch origin --depth 1 &&
-    git config core.sparseCheckout true &&
-    echo ${TOOLCHAIN_REL_SRC_DIR} >> .git/info/sparse-checkout &&
-    git checkout master &&
-    cd .. &&
-    mv -f ./src/${TOOLCHAIN_REL_SRC_DIR} ${TOOLCHAIN_DIR} &&
-    rm -rf ./src
+RUN mkdir -p ${TOOLCHAIN_DIR}src && \
+    cd ${TOOLCHAIN_DIR}src && \
+    git init && \
+    git remote add origin git://github.com/raspberrypi/tools.git && \
+    git fetch origin --depth 1 && \
+    git config core.sparseCheckout true && \
+    echo ${TOOLCHAIN_REL_SRC_DIR} >> .git/info/sparse-checkout && \
+    git checkout master && \
+    cd .. && \
+    mv -f ./src/${TOOLCHAIN_REL_SRC_DIR} ${TOOLCHAIN_DIR} && \
+    rm -rf ./src \
 
 # Export common environment variables
 # Export common environment variables
