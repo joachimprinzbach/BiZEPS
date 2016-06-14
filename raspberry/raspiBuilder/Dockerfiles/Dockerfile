@@ -3,15 +3,15 @@ MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # Arguments during the docker build
 ARG REPO_URL=git://github.com/raspberrypi/tools.git
-ARG REPO_DIR=/workspace
+ARG X_TOOLCHAIN=gcc-linaro-arm-linux-gnueabihf-raspbian-x64
 ARG TOOL_CHAIN_REL_PATH=arm-bcm2708/${X_TOOLCHAIN}
-ARG INSTALL_PATH=/development/
+ARG REPO_DIR=/workspace
+ARG INSTALL_PATH=/development
+ARG TOOL_CHAIN_PATH=${INSTALL_PATH}/toolChain
 ARG VAR_FILE=${INSTALL_PATH}/vars.env
-ARG TOOL_CHAIN_DIR=${INSTALL_PATH}/toolChain/
 
 # Environment variables for the image
-ENV X_TOOLCHAIN gcc-linaro-arm-linux-gnueabihf-raspbian-x64
-ENV PATH ${TOOL_CHAIN_DIR}${X_TOOLCHAIN}/bin:${PATH}
+ENV PATH ${TOOL_CHAIN_PATH}/${X_TOOLCHAIN}/bin:${PATH}
 ENV CC arm-linux-gnueabihf-gcc
 ENV CXX arm-linux-gnueabihf-g++
 
@@ -26,7 +26,7 @@ RUN chown -R jenkins ${INSTALL_PATH}
 # Install cross toolchain to specified tool chain directory
 # Keep disk space during docker build process small
 # Fetch from git repo, only fetch one commit and checkout only required folder
-RUN mkdir -p ${TOOL_CHAIN_DIR}
+RUN mkdir -p ${TOOL_CHAIN_PATH}
 RUN mkdir -p ${REPO_DIR} && \
     cd ${REPO_DIR} && \
     git init && \
@@ -35,7 +35,7 @@ RUN mkdir -p ${REPO_DIR} && \
     git config core.sparseCheckout true && \
     echo ${TOOL_CHAIN_REL_PATH} >> .git/info/sparse-checkout && \
     git checkout master && \
-    mv -f .${TOOL_CHAIN_REL_PATH} ${TOOL_CHAIN_DIR} && \
+    mv -f .${TOOL_CHAIN_REL_PATH} ${TOOL_CHAIN_PATH} && \
     cd / && \
     rm -rf ${REPO_DIR}
 
