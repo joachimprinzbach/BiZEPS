@@ -6,7 +6,7 @@ if true; then
   echo
   echo "PREPARE: Download resources for docker image"
   echo "--------------------------------------------"
-  # Download only latest 
+  # Download only latest commit without history, checkout only the interesting folder with the toolchain
   TOOLCHAIN_REL_SRC_DIR=arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64
   mkdir ./src && cd ./src
   git init
@@ -23,7 +23,7 @@ fi
 
 # Builds a cross compiler for raspberry pi
 # -t defines the name for the created images
-if false; then
+if true; then
   echo
   echo "EXECUTE: Create docker image"
   echo "----------------------------"
@@ -31,7 +31,7 @@ if false; then
 fi
 
 # Remove the resources from the host after the docker image has been built
-if false; then
+if true; then
   echo
   echo "WRAP UP: Remove no more used resources"
   echo "--------------------------------------"
