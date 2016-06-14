@@ -35,7 +35,7 @@ RUN mkdir -p ${REPO_DIR} && \
     git config core.sparseCheckout true && \
     echo ${TOOL_CHAIN_REL_PATH} >> .git/info/sparse-checkout && \
     git checkout master && \
-    mv -f .${TOOL_CHAIN_REL_PATH}${TOOL_CHAIN_DIR} && \
+    mv -f .${TOOL_CHAIN_REL_PATH} ${TOOL_CHAIN_DIR} && \
     cd / && \
     rm -rf ${REPO_DIR}
 
