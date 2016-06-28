@@ -3,9 +3,9 @@ MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # Asciidoctor Slave Image
 
-ARG ASCIID_MAIN_VERSION "1.5.4"
-ARG ASCIID_DIAGRAMM_VERSION "1.4.0"
-ARG ASCIID_PDF_VERSION "1.5.0.alpha.11"
+ARG ASCIID_MAIN_VERSION="1.5.4"
+ARG ASCIID_DIAGRAMM_VERSION="1.4.0"
+ARG ASCIID_PDF_VERSION="1.5.0.alpha.11"
 
 RUN apt-get update && apt-get install -y \
   graphviz \
