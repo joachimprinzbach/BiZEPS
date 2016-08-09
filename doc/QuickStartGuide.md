@@ -29,7 +29,7 @@ Execute the following commands in the Docker Quickstart Terminal.
 - Clone the repository
   - `git clone https://github.com/Zuehlke/BiZEPS.git`
 - Create the BiZEPS images
-  - `cd BiZEPS/utils`
+  - `cd BiZEPS/jenkins`
   - `./buildBiZEPS.sh`
 
 ##  Start Jenkins
