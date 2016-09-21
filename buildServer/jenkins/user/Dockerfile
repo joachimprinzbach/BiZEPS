@@ -1,8 +1,7 @@
 FROM debian:jessie
-MAINTAINER Dominik Ebert <doe@zuehlke.com>
+MAINTAINER Peter Schmid <peter.schmid@zuehlke.com>
 
-# Modified official Jenkins Dockerfile
-# See: https://github.com/jenkinsci/docker
+# creating the base image for jenkins master and data volume to share users
 
 # update
 RUN apt-get update && rm -rf /var/lib/apt/lists/*
