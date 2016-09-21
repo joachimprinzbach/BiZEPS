@@ -38,6 +38,7 @@ The certificates are also stored in the Windows user home directory at `.boot2do
 Doing so is a massive security risk because the socket is accessible from everywhere in the network.
 But for testing purpose it may be useful to temporary deactivate the docker port encryption.
 This can be done with the entry `DOCKER_TLS=no` in the `/var/lib/boot2docker/profile` file.
+Run `sudo sudo /etc/init.d/docker restart` to restart the docker service.
 
 Other sockets that should be exposed as Docker sockets can also be configured with the profile.
 Adding the entry `EXTRA_ARGS="-H tcp://0.0.0.0:4243` exposes the Docker socket
