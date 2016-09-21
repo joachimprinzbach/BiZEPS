@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson>
+  <clouds>
+    <com.nirima.jenkins.plugins.docker.DockerCloud plugin="docker-plugin@0.16.2">
+      <name>dockerHost</name>
+      <templates>
+        <com.nirima.jenkins.plugins.docker.DockerTemplate>
+          <configVersion>2</configVersion>
+          <labelString>biz-slave</labelString>
+          <launcher class="com.nirima.jenkins.plugins.docker.launcher.DockerComputerSSHLauncher">
+            <sshConnector plugin="ssh-slaves@1.11">
+              <port>22</port>
+              <credentialsId>38b486c6-27e5-4aa6-bbd0-2aa3ec2d8c90</credentialsId>
+            </sshConnector>
+          </launcher>
+          <remoteFs>/home/jenkins</remoteFs>
+          <dockerTemplateBase>
+            <image>biz/jenkinsslave</image>
+          </dockerTemplateBase>
+        </com.nirima.jenkins.plugins.docker.DockerTemplate>
+      </templates>
+      <serverUrl>tcp://172.17.0.1:2376</serverUrl> <!-- unix:///var/run/docker.sock -->
+    </com.nirima.jenkins.plugins.docker.DockerCloud>
+  </clouds>
+</hudson>
