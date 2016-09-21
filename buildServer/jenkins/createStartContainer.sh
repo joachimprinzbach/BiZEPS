@@ -2,7 +2,7 @@
 
 # Creates a volume container for the jenkins server with the specified name
 # The volume container has not to be started
-docker create -v /var/jenkins_home --name bizJenkinsHome biz/jenkins
+docker create -v /var/jenkins_home --name bizJenkinsHome biz/jenkinsuser
 
 # Creates and starts the Jenkins master container
 # -d for dispatched mode (run in background)
