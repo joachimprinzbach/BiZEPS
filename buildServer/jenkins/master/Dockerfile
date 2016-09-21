@@ -6,10 +6,10 @@ MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # install java
 RUN apt-get update && apt-get install -y \
-    default-jre \
     curl \
-    zip \
+    default-jre \
     git \
+    zip \
     && rm -rf /var/lib/apt/lists/*
 
 ENV JENKINS_HOME /var/jenkins_home
