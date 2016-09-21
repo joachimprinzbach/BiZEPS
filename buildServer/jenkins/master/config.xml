@@ -14,12 +14,15 @@
             </sshConnector>
           </launcher>
           <remoteFs>/home/jenkins</remoteFs>
+          <instanceCap>1</instanceCap>
           <dockerTemplateBase>
             <image>biz/jenkinsslave</image>
           </dockerTemplateBase>
         </com.nirima.jenkins.plugins.docker.DockerTemplate>
       </templates>
-      <serverUrl>tcp://172.17.0.1:2376</serverUrl> <!-- unix:///var/run/docker.sock -->
+      <serverUrl>tcp://192.168.99.100:2376</serverUrl>
+      <credentialsId>19773790-ccca-4b26-a7d2-68a066ef4241</credentialsId>
+      <containerCap>100</containerCap>
     </com.nirima.jenkins.plugins.docker.DockerCloud>
   </clouds>
 </hudson>
