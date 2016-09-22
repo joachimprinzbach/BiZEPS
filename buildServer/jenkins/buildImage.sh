@@ -6,3 +6,13 @@
 docker build -t biz/jenkinsuser ./user
 docker build -t biz/jenkins ./master
 docker build -t biz/jenkinsslave ./slave
+
+# Create image for the certificates
+# Add TLS certificates for the docker daemon communication if available
+# For docker machine, the certificates are located at '<home>/.docker/machine/certs'
+CERT_DIR=./masterCerts/certs
+if [ -d ${CERT_DIR} ]; then
+  docker build -t biz/jenkinscerts ./masterCerts -f "./masterCerts/Dockerfile"
+else
+  docker build -t biz/jenkinscerts ./masterCerts -f "./masterCerts/Dockerfile_noCerts"
+fi
