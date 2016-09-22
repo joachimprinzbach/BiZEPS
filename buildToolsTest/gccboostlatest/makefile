@@ -10,8 +10,8 @@ all: $(TARGET)
 %.o: %.cpp
 	$(CXX) $(CFLAGS) -c -o $@ $<
 
-$(TARGET): test_main.o test1.o test2.o
-	$(CXX) -o $@ $< $(LIBS)
+$(TARGET): test_main.o
+	$(CXX) -o $@ $^ $(LIBS)
 
 clean:
 	$(RM) $(TARGET)
