@@ -1,7 +1,7 @@
 #!/bin/sh
 
-# Build latest GCC image
+# Add boost lilb to g++ image
 # -t defines the name for the created images
 
-docker build -t biz/gcclatest ./gcclatest
+./buildgcclatest.sh
 docker build -t biz/gccboostlatest ./gccboostlatest

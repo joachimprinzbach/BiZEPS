@@ -10,7 +10,7 @@ all: $(TARGET)
 %.o: %.cpp
 	$(CXX) $(CFLAGS) -c -o $@ $<
 
-$(TARGET): $(TARGET).o
+$(TARGET): test_main.o test1.o test2.o
 	$(CXX) -o $@ $< $(LIBS)
 
 clean:
