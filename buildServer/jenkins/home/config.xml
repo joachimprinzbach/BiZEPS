@@ -49,7 +49,7 @@
           <pullStrategy>PULL_LATEST</pullStrategy>
         </com.nirima.jenkins.plugins.docker.DockerTemplate>
       </templates>
-      <serverUrl>tcp://192.168.99.100:2376</serverUrl>
+      <serverUrl>(DOCKER_SERVER_URL)</serverUrl>
       <connectTimeout>0</connectTimeout>
       <readTimeout>0</readTimeout>
       <version></version>

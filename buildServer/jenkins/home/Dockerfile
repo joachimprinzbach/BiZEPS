@@ -1,0 +1,22 @@
+FROM biz/jenkinsuser
+MAINTAINER Daniel Merz <daniel.merz@zuehlke.com>
+
+# creating the base image for jenkins master data volume 
+
+# update
+RUN apt-get update && rm -rf /var/lib/apt/lists/*
+
+# create Jenkins uster
+ENV JENKINS_HOME /var/jenkins_home
+ARG user=jenkins
+ARG DOCKER_SERVER_URL
+ARG CERT_DIR=/var/certs/localDockerDaemon
+
+USER ${user}
+
+COPY ./config.xml $JENKINS_HOME/config.xml
+RUN sed -i 's/(DOCKER_SERVER_URL)/$DOCKER_SERVER_URL/g' $JENKINS_HOME/config.xml
+
+COPY ./credentials.xml /$JENKINS_HOME/credentials.xml
+RUN sed -i 's/(CERT_DIR)/$CERT_DIR/g' $JENKINS_HOME/config.xml
+
