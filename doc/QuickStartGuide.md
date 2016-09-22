@@ -55,7 +55,7 @@ Check the credentials to access the docker daemon:
   - Description: `Docker Daemon TLS`
   - Path `/var/certs/localDockerDaemon`
 
-[!Credentials](Images/Credentials_01.jpg)
+![Credentials](Images/Credentials_01.jpg)
   
 ##  Prepare the Jenkins Docker Plug In
 Once Jenkins is started, the Docker plug in can be configured.
