@@ -9,14 +9,22 @@ RUN apt-get update && rm -rf /var/lib/apt/lists/*
 # create Jenkins uster
 ENV JENKINS_HOME /var/jenkins_home
 ARG user=jenkins
+ARG group=users
 ARG DOCKER_SERVER_URL
 ARG CERT_DIR=/var/certs/localDockerDaemon
 
-USER ${user}
-
 COPY ./config.xml $JENKINS_HOME/config.xml
-RUN sed -i 's/(DOCKER_SERVER_URL)/$DOCKER_SERVER_URL/g' $JENKINS_HOME/config.xml
+RUN sed -i 's/(DOCKER_SERVER_URL_PLACEHOLDER)/$DOCKER_SERVER_URL/g' $JENKINS_HOME/config.xml
+RUN chmod +r $JENKINS_HOME/config.xml
+RUN chown ${user}:${group} $JENKINS_HOME/config.xml
 
 COPY ./credentials.xml /$JENKINS_HOME/credentials.xml
-RUN sed -i 's/(CERT_DIR)/$CERT_DIR/g' $JENKINS_HOME/config.xml
+RUN sed -i 's/(CERT_DIR_PLACEHOLDER)/$CERT_DIR/g' $JENKINS_HOME/credentials.xml
+RUN chmod +r $JENKINS_HOME/credentials.xml
+RUN chown ${user}:${group} $JENKINS_HOME/credentials.xml
+
+VOLUME ${JENKINS_HOME}
+
+CMD ["true"]
+
 

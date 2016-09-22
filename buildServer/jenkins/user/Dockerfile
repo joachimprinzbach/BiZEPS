@@ -18,3 +18,7 @@ ARG gid=100
 # ensure you use the same uid
 RUN useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
+VOLUME ${JENKINS_HOME}
+
+CMD ["true"]
+
