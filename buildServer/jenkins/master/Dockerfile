@@ -12,9 +12,8 @@ RUN apt-get update && apt-get install -y \
     zip \
     && rm -rf /var/lib/apt/lists/*
 
-ENV JENKINS_HOME /var/jenkins_home
-
 ARG user=jenkins
+ENV JENKINS_HOME /var/jenkins_home
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want 
 # to set on a fresh new installation. Use it to bundle additional plugins 
