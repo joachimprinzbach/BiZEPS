@@ -28,21 +28,35 @@ Execute the following commands in the Docker Quickstart Terminal.
   - `cd dev`
 - Clone the repository
   - `git clone https://github.com/Zuehlke/BiZEPS.git`
+- Optional: Prepare the TLS certificates
+  - The docker daemon secures its REST API interface with TLS certificates (by default)
+  - Docker machine provides the certificates under `<user_home>/.docker/machine/certs`
+  - Certificates: 'ca.pem', 'ca-key.pem', 'cert.pem' and 'key.pem'
+  - Copy them to the directory `./BiZEPS/buildServer/jenkins/masterCerts/certs/`
 - Create the BiZEPS images
-  - `cd BiZEPS/jenkins`
-  - `./buildBiZEPS.sh`
+  - `cd BiZEPS/buildServer/jenkins`
+  - `./buildImage.sh`
 
 ##  Start Jenkins
 As soon as the images are created you are able to start and use the Jenkins server.
 
 - Start the Jenkins Server
-  - `./jenkinsStart.sh`
+  - `./createStartContainer.sh`
 - Check the IP of the Docker VM
   - The IP is printed out when the docker console starts
   - Or `docker-machine url` will print the IP address of the VM
 - Connect to the started Jenkins with your web browser
   - For example `http://192.168.99.100:8080`
+  
+##  Prepare Credentials
+Check the credentials to access the docker daemon:
+- Select `Credentials/Global credentials/Add Credentials`
+  - Kind: `Docker Certificates Directory`
+  - Description: `Docker Daemon TLS`
+  - Path `/var/certs/localDockerDaemon`
 
+![Credentials](Images/Credentials_01.jpg)
+  
 ##  Prepare the Jenkins Docker Plug In
 Once Jenkins is started, the Docker plug in can be configured.
 
@@ -53,14 +67,15 @@ At the bottom of the configuration page click `Add a new cloud` and select `Dock
 ![Step 1](Images/DockerPlugin_01.jpg)
 
 ### Connection to Docker API
-Give your Docker cloud a name and add the Docker URL `unix:///var/run/docker.sock`.
+Give your Docker cloud a name and add the Docker URL
+(the IP of the host where the docker daemon exposes its REST API, e.g. `tcp://192.168.99.100:2376`).
 With `Test Connection` you can verify that the Docker plug in can communicate with the Docker API.
 
 ![Step 2](Images/DockerPlugin_02.jpg)
 
 ### Add a New Docker Template
 At images click `Add Docker Template` and select `Docker Template`.
-Write `dci/jenkinsslave` in the text box `Docker Image` and define the Label with `dci-slave`.
+Write `biz/jenkinsslave` in the text box `Docker Image` and define the Label with `biz-slave`.
 Add new Cridentials of the Kind `Username with password` and at `Global` scope.
 Use `jenkins` as username and password.
 
@@ -69,7 +84,7 @@ Use `jenkins` as username and password.
 ##  Create a New Job
 At the main page of Jenkins select `create new jobs`, select `Freesyle project` and think out a nice name.
 On the next page make sure that `Restrict where this project can be run` is checked and
-select `dci-slave` as `Label Expression`.
+select `biz-slave` as `Label Expression`.
 In the section `Build` click `Add build step`, select `Execute shell` and
 write a test command into the text box.
 For example `echo "Hello BiZEPS"`.

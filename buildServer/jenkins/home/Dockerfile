@@ -9,7 +9,7 @@ RUN apt-get update && rm -rf /var/lib/apt/lists/*
 # create Jenkins uster
 ENV JENKINS_HOME /var/jenkins_home
 ARG user=jenkins
-ARG group=users
+ARG group=jenkins
 ARG DOCKER_SERVER_URL
 ARG CERT_DIR=/var/certs/localDockerDaemon
 
@@ -22,6 +22,28 @@ COPY ./credentials.xml /$JENKINS_HOME/credentials.xml
 RUN sed -i 's/(CERT_DIR_PLACEHOLDER)/$CERT_DIR/g' $JENKINS_HOME/credentials.xml
 RUN chmod +r $JENKINS_HOME/credentials.xml
 RUN chown ${user}:${group} $JENKINS_HOME/credentials.xml
+
+COPY ./config.xml $JENKINS_HOME/config4.xml
+RUN chmod +r $JENKINS_HOME/config4.xml
+RUN chown ${user}:${group} $JENKINS_HOME/config4.xml
+RUN sed -i 's/(DOCKER_SERVER_URL_PLACEHOLDER)/$DOCKER_SERVER_URL/g' $JENKINS_HOME/config4.xml
+
+COPY ./config.xml $JENKINS_HOME/config5.xml
+RUN chmod +r $JENKINS_HOME/config5.xml
+RUN chown ${user}:${group} $JENKINS_HOME/config5.xml
+
+USER ${user}
+
+RUN sed -i 's/(DOCKER_SERVER_URL_PLACEHOLDER)/$DOCKER_SERVER_URL/g' $JENKINS_HOME/config5.xml
+
+RUN echo "DOCKER_SERVER_URL=$DOCKER_SERVER_URL"
+RUN echo "CERT_DIR=$CERT_DIR"
+
+COPY ./config.xml $JENKINS_HOME/config2.xml
+RUN chmod +r $JENKINS_HOME/config2.xml
+RUN chown ${user}:${group} $JENKINS_HOME/config2.xml
+RUN sed -i 's/(DOCKER_SERVER_URL_PLACEHOLDER)/$DOCKER_SERVER_URL/g' $JENKINS_HOME/config2.xml
+
 
 VOLUME ${JENKINS_HOME}
 
