@@ -17,7 +17,7 @@
               <retryWaitTime>0</retryWaitTime>
             </sshConnector>
           </launcher>
-          <remoteFsMapping>/var/jenkins_home</remoteFsMapping>
+          <remoteFsMapping>(JENKINS_HOME_PLACEHOLDER)</remoteFsMapping>
           <remoteFs>/home/jenkins</remoteFs>
           <instanceCap>1</instanceCap>
           <mode>NORMAL</mode>
