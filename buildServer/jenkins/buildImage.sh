@@ -6,6 +6,7 @@
 docker build -t biz/jenkinsuser ./user
 resultJenkinsUser=$?
 docker build -t biz/jenkinshome ./home --build-arg DOCKER_SERVER_URL=tcp://192.168.99.100:2376
+resultJenkinsHome=$?
 docker build -t biz/jenkins ./master
 resultJenkinsMaster=$?
 docker build -t biz/jenkinsslave ./slave
@@ -24,11 +25,12 @@ else
 fi
 
 echo "--------------------------------"
-resultsSum=$((resultJenkinsUser + resultJenkinsMaster + resultJenkinsSlave + resultJenkinsCerts))
+resultsSum=$((resultJenkinsUser + resultJenkinsHome + resultJenkinsMaster + resultJenkinsSlave + resultJenkinsCerts))
 if [ "$resultsSum" -gt "0" ] 
 then
   echo "WARNING: Not all images successfully created!!!"
   echo "JenkinsUser=$resultJenkinsUser"
+  echo "JenkinsHome=$resultJenkinsHome"
   echo "JenkinsMaster=$resultJenkinsMaster"
   echo "JenkinsSlave=$resultJenkinsSlave"
   echo "JenkinsCerts=$resultJenkinsCerts"
