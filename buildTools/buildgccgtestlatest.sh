@@ -1,7 +1,5 @@
 #!/bin/sh
 
-# Add google test lilb to g++ image
-# -t defines the name for the created images
-
-./buildgcclatest.sh
-docker build -t biz/gccgtestlatest ./gccgtestlatest
+(cd ./mcmatools && ./buildImage.sh)
+(cd ./gcclatest && ./buildImage.sh)
+(cd ./gccgtestlatest && ./buildImage.sh)
