@@ -8,15 +8,7 @@ ARG CERT_DIR=/var/certs/localDockerDaemon
 ARG user=jenkins
 ARG group=jenkins
 
-# Copy the docker daemon certificates to communicate with the REST API
-COPY ./certs/ca-key.pem ${CERT_DIR}/ca-key.pem
-COPY ./certs/ca.pem ${CERT_DIR}/ca.pem
-COPY ./certs/cert.pem ${CERT_DIR}/cert.pem
-COPY ./certs/key.pem ${CERT_DIR}/key.pem
-
-# Make sure cert permissions are set correctly
-RUN chmod +r ${CERT_DIR}/ca.pem
-RUN chmod +r ${CERT_DIR}/cert.pem
+RUN mkdir -p ${CERT_DIR}
 RUN chown -R ${user}:${group} ${CERT_DIR}
 
 VOLUME ${CERT_DIR}

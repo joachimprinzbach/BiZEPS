@@ -9,18 +9,8 @@ docker build -t biz/jenkins ./master
 resultJenkinsMaster=$?
 docker build -t biz/jenkinsslave ./slave
 resultJenkinsSlave=$?
-
-# Create image for the certificates
-# Add TLS certificates for the docker daemon communication if available
-# For docker machine, the certificates are located at '<home>/.docker/machine/certs'
-CERT_DIR=./masterCerts/certs
-if [ -d ${CERT_DIR} ]; then
-  docker build -t biz/jenkinscerts ./masterCerts -f "./masterCerts/Dockerfile"
-  resultJenkinsCerts=$?
-else
-  docker build -t biz/jenkinscerts ./masterCerts -f "./masterCerts/Dockerfile_noCerts"
-  resultJenkinsCerts=$?
-fi
+docker build -t biz/jenkinscerts ./masterCerts
+resultJenkinsCerts=$?
 
 echo "--------------------------------"
 resultsSum=$((resultJenkinsUser + resultJenkinsMaster + resultJenkinsSlave + resultJenkinsCerts))
