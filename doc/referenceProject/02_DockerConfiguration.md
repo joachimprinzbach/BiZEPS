@@ -1,6 +1,6 @@
-[prev: BiZEPS Reference Project Overview](01_BizepsReferenceProject.md)
-
 [next: Jenkins Configuration](03_JenkinsConfiguration.md)
+
+[prev: BiZEPS Reference Project Overview](01_BizepsReferenceProject.md)
 
 #   Docker Configuration
 ##  Docker Daemon Startup
@@ -9,6 +9,7 @@ The BiZEPS reference project starts the daemon with the following parameters:
 `dockerd -D --tls=true --tlscert=/var/docker/server.pem --tlskey=/var/docker/serverkey.pem -H tcp://127.0.0.1:2376`
 
 ### Details
+
 | Parameter   | Description |
 |-            |-            |
 | -D          | Enable debug mode |
