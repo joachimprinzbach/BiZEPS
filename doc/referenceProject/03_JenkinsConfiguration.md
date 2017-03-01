@@ -1,4 +1,4 @@
-[prev: Docker Configuration](03_JenkinsConfiguration.md)
+[prev: Docker Configuration](02_DockerConfiguration.md)
 
 #   Jenkins Master Configuration
 Configure the Jenkins master to connect to the docker daemon, start slave containers and run a build job.
