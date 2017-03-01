@@ -6,7 +6,7 @@
 
 #   Documentation
 - [What is BiZEPS](doc/introduction/01_BiZEPS_Introduction.md)
-- [BiZEPS Reference Project](doc/referenceProject/01_DockerConfiguration.md)
+- [BiZEPS Reference Project](doc/referenceProject/01_BizepsReferenceProject.md)
 
 #   Overview
 BiZEPS realizes the continuous integration build with Jenkins and Docker.
