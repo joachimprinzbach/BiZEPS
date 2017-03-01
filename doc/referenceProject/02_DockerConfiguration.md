@@ -11,7 +11,7 @@ The BiZEPS reference project starts the daemon with the following parameters:
 ### Details
 
 | Parameter   | Description |
-|-            |-            |
+| ---         | ---         |
 | -D          | Enable debug mode |
 | --tls=true  | Enforce TLS authentication for the docker rest API  |
 | --tlscert   | Path to the TLS certificate |
