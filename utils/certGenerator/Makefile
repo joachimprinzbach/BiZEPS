@@ -2,23 +2,24 @@ CA_NAME=DockerHost
 SERVER_NAME=DockerHost
 SERVER_ALTNAMES=DNS:${SERVER_NAME},IP:127.0.0.1
 SERVER_BIND=0.0.0.0
+OUT_DIR=.
 
 SYSTEMD_FILE=/etc/systemd/system/docker.service.d/docker-tls.conf
 CERT_DIR=/etc/docker/certs
 
-CA_CERT=ca.pem
-CA_KEY=ca-key.pem
+CA_CERT=${OUT_DIR}/ca.pem
+CA_KEY=${OUT_DIR}/ca-key.pem
 CA_SRL=$(basename ${CA_CERT}).srl
 CA_DAYS=3650
 
-SERVER_DIR=server
+SERVER_DIR=${OUT_DIR}/server
 SERVER_CERT=${SERVER_DIR}/cert.pem
 SERVER_KEY=${SERVER_DIR}/key.pem
 SERVER_CSR=${SERVER_DIR}/request.csr
 SERVER_DAYS=3650
 
 CLIENT_NAME=client
-CLIENT_DIR=client
+CLIENT_DIR=${OUT_DIR}/client
 CLIENT_CERT=${CLIENT_DIR}/cert.pem
 CLIENT_KEY=${CLIENT_DIR}/key.pem
 CLIENT_CSR=${CLIENT_DIR}/request.csr
