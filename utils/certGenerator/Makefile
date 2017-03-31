@@ -6,23 +6,23 @@ SERVER_BIND=0.0.0.0
 SYSTEMD_FILE=/etc/systemd/system/docker.service.d/docker-tls.conf
 CERT_DIR=/etc/docker/certs
 
-CA_CERT=ca-cert.pem
+CA_CERT=ca.pem
 CA_KEY=ca-key.pem
 CA_SRL=$(basename ${CA_CERT}).srl
 CA_DAYS=3650
 
-SERVER_CERT=server-cert.pem
-SERVER_KEY=server-key.pem
-SERVER_CSR=server.csr
+SERVER_DIR=server
+SERVER_CERT=${SERVER_DIR}/cert.pem
+SERVER_KEY=${SERVER_DIR}/key.pem
+SERVER_CSR=${SERVER_DIR}/request.csr
 SERVER_DAYS=3650
 
 CLIENT_NAME=client
-CLIENT_CERT=client-cert.pem
-CLIENT_KEY=client-key.pem
-CLIENT_CSR=client.csr
+CLIENT_DIR=client
+CLIENT_CERT=${CLIENT_DIR}/cert.pem
+CLIENT_KEY=${CLIENT_DIR}/key.pem
+CLIENT_CSR=${CLIENT_DIR}/request.csr
 CLIENT_DAYS=3650
-
-EXT_FILE=extfile.cnf
 
 all: ca server client
 
@@ -35,40 +35,42 @@ ca:
 	  -out ${CA_CERT}
 
 server:
+	mkdir -p ${SERVER_DIR}
 	openssl genrsa -out ${SERVER_KEY} 4096
 	openssl req -new -sha256 \
 	  -subj "/CN=${SERVER_NAME}" \
 	  -key ${SERVER_KEY} \
 	  -out ${SERVER_CSR}
-	echo subjectAltName = ${SERVER_ALTNAMES} > ${EXT_FILE}
+	echo subjectAltName = ${SERVER_ALTNAMES} > ${SERVER_CSR}.ext
 	openssl x509 -req -sha256 \
 	  -in ${SERVER_CSR} \
 	  -days ${SERVER_DAYS} \
 	  -CA ${CA_CERT} \
 	  -CAkey ${CA_KEY} \
 	  -CAcreateserial \
-	  -extfile ${EXT_FILE} \
+	  -extfile ${SERVER_CSR}.ext \
 	  -out ${SERVER_CERT}
-	rm ${SERVER_CSR}
-	rm ${EXT_FILE}
+	rm ${SERVER_CSR} ${SERVER_CSR}.ext
+	cp ${CA_CERT} ${SERVER_DIR}
 
 client:
+	mkdir -p ${CLIENT_DIR}
 	openssl genrsa -out ${CLIENT_KEY} 4096
 	openssl req -new -sha256 \
 	  -subj "/CN=${CLIENT_NAME}" \
 	  -key ${CLIENT_KEY} \
 	  -out ${CLIENT_CSR}
-	echo extendedKeyUsage = clientAuth > ${EXT_FILE}
+	echo extendedKeyUsage = clientAuth > ${CLIENT_CSR}.ext
 	openssl x509 -req -sha256 \
 	  -in ${CLIENT_CSR} \
 	  -days ${CLIENT_DAYS} \
 	  -CA ${CA_CERT} \
 	  -CAkey ${CA_KEY} \
 	  -CAcreateserial \
-	  -extfile ${EXT_FILE} \
+	  -extfile ${CLIENT_CSR}.ext \
 	  -out ${CLIENT_CERT}
-	rm ${CLIENT_CSR}
-	rm ${EXT_FILE}
+	rm ${CLIENT_CSR} ${CLIENT_CSR}.ext
+	cp ${CA_CERT} ${CLIENT_DIR}
 
 install:
 	mkdir -p ${CERT_DIR}
