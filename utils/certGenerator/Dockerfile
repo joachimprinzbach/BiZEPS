@@ -24,4 +24,5 @@ VOLUME ${out_dir}
 USER ${user}
 WORKDIR ${app_dir}
 
-CMD ["make", "all", "OUT_DIR=${out_dir}"]
+ENTRYPOINT ["make", "OUT_DIR=${out_dir}"]
+CMD ["all"]

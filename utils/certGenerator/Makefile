@@ -27,6 +27,10 @@ CLIENT_DAYS=3650
 
 all: ca server client
 
+clean:
+	rm ${CA_CERT} ${CA_KEY} ${CA_SRL}
+	rm -rf ${SERVER_DIR} ${CLIENT_DIR}
+
 ca:
 	openssl genrsa -out ${CA_KEY} 4096
 	openssl req -new -x509 -sha256 \
