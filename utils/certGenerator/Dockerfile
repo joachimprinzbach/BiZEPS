@@ -4,7 +4,7 @@ MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 ARG user=boxer
 ARG app_dir=/var/boxer
-ENV out_dir=/var/build
+ENV target_dir=/var/build
 
 RUN apk add --no-cache \
   make \
@@ -12,17 +12,15 @@ RUN apk add --no-cache \
 
 RUN adduser -D -u 1000 -g '${user}' ${user}
 RUN mkdir -p ${app_dir} && \
-    mkdir -p ${out_dir}
+    mkdir -p ${target_dir}
 
 COPY ./Makefile ${app_dir}
 
 RUN chown -R ${user}:${user} ${app_dir}
-RUN chown -R ${user}:${user} ${out_dir}
-
-VOLUME ${out_dir}
+RUN chown -R ${user}:${user} ${target_dir}
 
 USER ${user}
 WORKDIR ${app_dir}
 
-ENTRYPOINT ["make", "OUT_DIR=${out_dir}"]
-CMD ["all"]
+ENTRYPOINT ["make", "OUT_DIR=${target_dir}"]
+CMD ["rebuild"]
