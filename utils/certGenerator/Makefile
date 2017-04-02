@@ -25,13 +25,17 @@ CLIENT_KEY=${CLIENT_DIR}/key.pem
 CLIENT_CSR=${CLIENT_DIR}/request.csr
 CLIENT_DAYS=3650
 
-all: ca server client
+.PHONY : all clean rebuild ca server client
+
+all: server client
 
 clean:
-	rm ${CA_CERT} ${CA_KEY} ${CA_SRL}
+	rm -f ${CA_CERT} ${CA_KEY} ${CA_SRL}
 	rm -rf ${SERVER_DIR} ${CLIENT_DIR}
 
-ca:
+rebuild: clean all
+  
+${CA_CERT}:
 	openssl genrsa -out ${CA_KEY} 4096
 	openssl req -new -x509 -sha256 \
 	  -subj "/CN=${CA_NAME}" \
@@ -39,7 +43,7 @@ ca:
 	  -key ${CA_KEY} \
 	  -out ${CA_CERT}
 
-server:
+server: ${CA_CERT}
 	mkdir -p ${SERVER_DIR}
 	openssl genrsa -out ${SERVER_KEY} 4096
 	openssl req -new -sha256 \
@@ -58,7 +62,7 @@ server:
 	rm ${SERVER_CSR} ${SERVER_CSR}.ext
 	cp ${CA_CERT} ${SERVER_DIR}
 
-client:
+client: ${CA_CERT}
 	mkdir -p ${CLIENT_DIR}
 	openssl genrsa -out ${CLIENT_KEY} 4096
 	openssl req -new -sha256 \
