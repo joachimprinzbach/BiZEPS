@@ -1,10 +1,9 @@
 [prev: BiZEPS Reference Project Overview](01_BizepsReferenceProject.md) | [next: Jenkins Configuration](03_JenkinsConfiguration.md)
 
-#   Docker Configuration
-##  Docker Daemon Startup
+#  Docker Daemon Startup
 The BiZEPS reference project starts the daemon with the following parameters:
 
-`dockerd -D --tlsverify --tlscacert=/var/docker/ca.pem --tlscert=/var/docker/server/cert.pem --tlskey=/var/docker/server/key.pem -H tcp://127.0.0.1:2376`
+`dockerd -D --tlsverify --tlscacert=/var/docker/server/ca.pem --tlscert=/var/docker/server/cert.pem --tlskey=/var/docker/server/key.pem -H tcp://127.0.0.1:2376`
 
 | Parameter   | Description |
 | ---         | ---         |
@@ -15,9 +14,9 @@ The BiZEPS reference project starts the daemon with the following parameters:
 | --tlskey    | Path to the TLS server key  (default: ~/.docker/key.pem)  |
 | -H tcp://127.0.0.1:2376 | Binds the docker REST API to the specific IP |
 
-### Details
+## Details
 
-####  Protect the REST API
+###  Protect the REST API
 The reference project protects the REST API with two approaches:
 
 **TLS authentication (certificates):**
@@ -25,8 +24,13 @@ Clients have to authenticate themself with a TLS certificate before they can
 interact with the docker daemon through the docker REST API.
 
 **Do not publish in the network:**
-The reference project does not provide the docker REST API on a physical network interface.
-It is not possible to connect to the docker REST API from the network.
+The reference project publishes the docker daemon REST API only on the localhost network interface
+and not on a physical network interface.
+Therefore it is not possible to access the docker REST API from the network.
 On the one hand this is a limitation but also improves the security.
+
+**TLS Certificates**
+The utility in `utils/certGenerator` of the BiZEPS project can be used
+to generate self signed client and server TLS certificates.
 
 [prev: BiZEPS Reference Project Overview](01_BizepsReferenceProject.md) | [next: Jenkins Configuration](03_JenkinsConfiguration.md)

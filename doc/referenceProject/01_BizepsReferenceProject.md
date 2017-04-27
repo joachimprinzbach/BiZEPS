@@ -14,8 +14,8 @@ The reference project describes the BiZEPS architecture, setup and configuration
                                                                                      |                    | |
                                                                                    +-+------------------+ | |
                                                                                    |                    | +-+
-                                                                                   | k)Container        | |
-                                                                                   |   Jenkins slave    +-+
+                                                                                   | k) Container       | |
+                                                                                   |    Jenkins slave   +-+
 +----------------------+                                                           |                    |
 |                      |                                                           +---------+--------+-+
 | Host file system     |                                                                     ^        ^
@@ -43,12 +43,12 @@ The reference project describes the BiZEPS architecture, setup and configuration
 |                                |                      |                                   |         |         |
 | Host network setup             |                      |                                   |         |         |
 |                                |                      v                                   v         v         |
-| +------------------------+ +---+----------------+ +---+----------------------------+ +----+---------+-------+ |
-| |                        | |                    | |                                | |                      | |
-| | d) eth0                | | e) localhost       | | f) Routing table entry         | | g) docker0 bridge    | |
-| |    (192.168.0.10)      | |    (127.0.0.1)     | |    (192.168.0.50 => 127.0.0.1) | |    (172.17.0.1)      | |
-| |                        | |                    | |                                | |                      | |
-| +------------------------+ +--------------------+ +--------------------------------+ +----------------------+ |
+| +------------------------+ +---+------------+     +---+----------------------------+ +----+---------+-------+ |
+| |                        | |                |     |                                | |                      | |
+| | d) eth0                | | e) localhost   |<----| f) Routing table entry         | | g) docker0 bridge    | |
+| |    (192.168.0.10)      | |    (127.0.0.1) |     |    (192.168.0.50 => 127.0.0.1) | |    (172.17.0.1)      | |
+| |                        | |                |     |                                | |                      | |
+| +------------------------+ +----------------+     +--------------------------------+ +----------------------+ |
 |                                                                                                               |
 +---------------------------------------------------------------------------------------------------------------+
 
@@ -73,6 +73,10 @@ Remote clients cannot access the docker daemon.
 ####  c) Certificates Docker TLS
 The BiZEPS reference project uses the built in TLS authentication to protect the docker REST API.
 A client has to authenticate himself before he can interact with the REST API.
+The certificates can be stored on the host, the docker daemon needs access to the server certificates.
+With the client certificates the Jenkins master can authenticate himself to the docker daemon.
+
+The BiZEPS projects provides a utility to create self signed server and client certificates (´utils/certGenerator´).
 
 ### Network
 ####  d) eth0
@@ -96,12 +100,32 @@ This interface is used by the clients to communicate
 
 ### Jenkins Master
 ####  h) Container Jenkins master
-####  i) Docker daemon REST API access
-####  j) Network access
+The container with the Jenkins service.
+The Jenkins master manages the Jenkins configuration, plugins and builds.
+By default Jenkins master creates and starts a slave container for every build job.
+The build is executed in a slave container, the build results are returned
+to the Jenkins master and afterwards the container is destroyed.
 
-### Jenkins Slave
+####  i) Docker daemon REST API access
+To create, start and destroy containers the Jenkins master
+has to interact with the docker daemon (via REST API).
+The Jenkins master has to authenticate with the TLS certificate and key to access the docker daemon API.
+Jenkins master uses the routing table entry to access the docker daemon.
+
+####  j) Network access
+To interact with the Jenkins server the 'public' network interface is published in the network.
+
+### Jenkins Slaves
 ####  k) Container Jeknins slave
+For every build job a dedicated slave container is started.
+The slave container contains the utilities to be accessed by the Jenkins master
+and the toolchain to fulfill a specific build job.
+By default a container shall contain one toolchain (in one specific version).
+
 ####  l) SSH
+Jenkins master controls the slave containers with an SSH connection.
+
 ####  m) Network access
+Even Jenkins slave container may access the public network.
 
 [next: Docker Configuration](02_DockerConfiguration.md)
