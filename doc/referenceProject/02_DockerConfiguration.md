@@ -30,7 +30,7 @@ Therefore it is not possible to access the docker REST API from the network.
 On the one hand this is a limitation but also improves the security.
 
 **TLS Certificates**
-The utility in `utils/certGenerator` of the BiZEPS project can be used
+The [certGenerator utility](utils/certGenerator/summary.md) of the BiZEPS project can be used
 to generate self signed client and server TLS certificates.
 
 [prev: BiZEPS Reference Project Overview](01_BizepsReferenceProject.md) | [next: Jenkins Configuration](03_JenkinsConfiguration.md)
