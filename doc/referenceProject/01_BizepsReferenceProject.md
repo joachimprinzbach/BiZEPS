@@ -8,7 +8,6 @@ The reference project describes the BiZEPS architecture, setup and configuration
 
 ```
 
-
                                                                                        +--------------------+
                                                                                        |                    |
                                                                                      +-+------------------+ |
@@ -21,18 +20,18 @@ The reference project describes the BiZEPS architecture, setup and configuration
 |                      |                                                           +---------+--------+-+
 | Host file system     |                                                                     ^        ^
 |                      |                                                                     |        |
-|                      |                              +--------------------------------+     |        |
-|                      |                              |                                |     |        |
-| +-----------------+  |                              | h) Container                   +-----+        | m) Network
-| |                 |  |                              |    Jenkins master              |  l) SSH      |    access
-| | c) Certificates +<--------------------------------+                                |              |
-| |    Docker TLS   |  |                              +-+----------------------------+-+              |
-| |                 |  |                                |                            ^                |
-| +----------+------+  |     +---------------------+    |                            |                |
-|            ^         |     |                     |    | i) Docker daemon           |                |
-|            +---------------+ a) Docker daemon    |    |    REST API access         | j) Network     |
-|                      |     |                     |    |    (192.168.0.50)          |    access      |
-|                      |     +---------------------+    |                            |                |
+| +-----------------+  |                              +--------------------------------+     |        |
+| | c) Certificates |  |                              |                                |     |        |
+| +    Docker TLS   |  |                              | h) Container                   +-----+        | m) Network
+| +=================+  |                              |    Jenkins master              |  l) SSH      |    access
+| | client/ca.pem   |<--------------------------------+                                |              |
+| | client/cert.pem |  |                              +-+----------------------------+-+              |
+| | client/key.pem  |  |                                |                            ^                |
+| +-----------------+  |     +---------------------+    |                            |                |
+| | server/ca.pem   |  |     |                     |    | i) Docker daemon           |                |
+| | server/cert.pem |<-------+ a) Docker daemon    |    |    REST API access         | j) Network     |
+| | server/key.pem  |  |     |                     |    |    (192.168.0.50)          |    access      |
+| +-----------------+  |     +---------------------+    |                            |                |
 |                      |     |                     |    |                            |                |
 |                      |     | b) Docker REST API  |    |                            |                |
 |                      |     |    (127.0.0.1)      |    |                            |                |
@@ -105,4 +104,4 @@ This interface is used by the clients to communicate
 ####  l) SSH
 ####  m) Network access
 
-
+[next: Docker Configuration](02_DockerConfiguration.md)
