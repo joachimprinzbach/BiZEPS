@@ -30,8 +30,7 @@ CLIENT_DAYS=3650
 all: server client
 
 clean:
-	rm -f ${CA_CERT} ${CA_KEY} ${CA_SRL}
-	rm -rf ${SERVER_DIR} ${CLIENT_DIR}
+	rm -rf ${OUT_DIR}/*
 
 rebuild: clean all
   
