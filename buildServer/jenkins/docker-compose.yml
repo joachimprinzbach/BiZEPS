@@ -15,4 +15,4 @@ services:
     image: bizeps/jenkinsuser
 
 volumes:
-  bizJenkinsHome
+  bizJenkinsHome:
