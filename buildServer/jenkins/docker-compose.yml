@@ -12,7 +12,7 @@ services:
     image: bizeps/jenkinsuser
     container_name: bizJenkinsHome
   jenkinsCerts:
-    build: ./masterCerts
+    build: ./certs
     image: bizeps/jenkinscerts
     container_name: bizJenkinsCerts
     volumes:
