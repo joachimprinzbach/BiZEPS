@@ -6,16 +6,13 @@ services:
     container_name: bizJenkins
     ports:
       - "8080:8080"
-    volumes_from:
-      - jenkinsUser
-      - jenkinsCerts:ro
+    volumes:
+      - bizJenkinsHome:/var/jenkins_home
+      - /var/certs/docker/client:/var/certs/docker/localDockerHost:ro
+  
   jenkinsUser:
     build: ./user
     image: bizeps/jenkinsuser
-    container_name: bizJenkinsHome
-  jenkinsCerts:
-    build: ./certs
-    image: bizeps/jenkinscerts
-    container_name: bizJenkinsCerts
-    volumes:
-      - /var/certs/docker/client:/var/certs/docker/localDockerHost
+
+volumes:
+  bizJenkinsHome
