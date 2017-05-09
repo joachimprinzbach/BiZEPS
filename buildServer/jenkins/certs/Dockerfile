@@ -4,7 +4,7 @@
 FROM biz/jenkinsuser
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
-ARG CERT_DIR=/var/certs/localDockerDaemon
+ARG CERT_DIR=/var/certs/docker/
 ARG user=jenkins
 ARG group=jenkins
 
@@ -13,4 +13,4 @@ RUN chown -R ${user}:${group} ${CERT_DIR}
 
 VOLUME ${CERT_DIR}
 
-CMD ["true"]
+CMD ["/bin/sh"]

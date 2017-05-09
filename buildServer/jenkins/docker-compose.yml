@@ -1,0 +1,19 @@
+version: '2'
+services:
+  jenkins:
+    build: ./master
+    image: bizeps/jenkins
+    container_name: bizJenkins
+    volumes_from:
+      - jenkinsUser
+      - jenkinsCerts:ro
+  jenkinsUser:
+    build: ./user
+    image: bizeps/jenkinsuser
+    container_name: bizJenkinsHome
+  jenkinsCerts:
+    build: ./masterCerts
+    image: bizeps/jenkinscerts
+    container_name: bizJenkinsCerts
+    volumes:
+      - /var/certs/docker/client:/var/certs/docker/localDockerHost
