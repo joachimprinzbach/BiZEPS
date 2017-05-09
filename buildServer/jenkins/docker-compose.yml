@@ -4,6 +4,8 @@ services:
     build: ./master
     image: bizeps/jenkins
     container_name: bizJenkins
+    ports:
+      - "8080:8080"
     volumes_from:
       - jenkinsUser
       - jenkinsCerts:ro
