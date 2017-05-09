@@ -59,7 +59,6 @@ server: ${CA_CERT}
 	  -CAcreateserial \
 	  -extfile ${SERVER_CSR}.ext \
 	  -out ${SERVER_CERT}
-	rm ${SERVER_CSR} ${SERVER_CSR}.ext
 	cp ${CA_CERT} ${SERVER_DIR}
 
 client: ${CA_CERT}

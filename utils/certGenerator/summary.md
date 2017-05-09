@@ -24,10 +24,17 @@ Generates self signed root CA and derived server and client certificate and key.
 See `docker-compose --help` for further information.
 
 
-## Input
-None
+##  Input
+### Server Name and Server Alternative Name
+By default, the server certificate is created with the following properties:
+- CA_NAME=DockerHost
+- SERVER_NAME=DockerHost
+- SERVER_ALTNAMES=DNS:DockerHost,IP:127.0.0.1
 
-## Output
+The default properties can be overridden with the following command:
+`docker-compose run --rm certGeneratorDockerHost "CA_NAME=MyHost" "SERVER_NAME=MyHost" "SERVER_ALTNAMES=DNS:MyHost,IP:127.0.0.1,IP:10.10.10.20"`
+
+##  Output
   - Create/use `output` directory on host in the execution folder
   - Create or overwrite certificates in the output directory
     - output contains root CA
