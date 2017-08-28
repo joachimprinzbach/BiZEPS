@@ -9,6 +9,10 @@ services:
     volumes:
       - bizJenkinsHome:/var/jenkins_home
       - /var/certs/docker/client:/var/certs/docker/localDockerHost:ro
+      
+  jenkinsSlave:
+    build: ./slave
+    image: bizeps/jenkinsSlave
   
   jenkinsUser:
     build: ./user
