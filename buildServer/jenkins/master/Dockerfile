@@ -9,6 +9,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     default-jre \
     git \
+    tar \
     zip \
     && rm -rf /var/lib/apt/lists/*
 
@@ -24,6 +25,13 @@ ENV JENKINS_HOME /var/jenkins_home
 # ensure you use the same uid
 RUN groupadd -g ${gid} ${group} \
     && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
+    
+# Install docker client to connect to a docker host from the container
+RUN mkdir -p /var/tmp
+COPY ./resources/docker-client-17.03.0-ce.tgz /var/tmp
+RUN tar xzvf /var/tmp/docker-client-17.03.0-ce.tgz -C /var/tmp
+RUN cp /var/tmp/docker/docker /usr/local/bin/docker
+RUN rm -rf /var/tmp/docker
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want 
 # to set on a fresh new installation. Use it to bundle additional plugins 
