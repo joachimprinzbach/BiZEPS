@@ -6,32 +6,32 @@ node {
     }
 
     stage ('Build Jenkins Slave image') {
-        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+        docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
             img = docker.build("biz/jenkinsslave:latest", "./buildServer/jenkins/slave")
         }
     }
 
     stage ('Build MCMA Tools image') {
-        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+        docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
             img = docker.build("biz/mcmatools:latest", "./buildTools/mcmatools")
         }
     }
 
     stage ('Build GCC image') {
-        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
-            img = docker.build("biz/gccl:latest", "./buildTools/gcclatest")
+        docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
+            img = docker.build("biz/gcc:latest", "./buildTools/gcclatest")
         }
     }
 	
    
     stage ('Build BOOST test image') {
-        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+        docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
             img = docker.build("biz/gccboost:latest", "./buildTools/gccboostlatest")
         }
     }
 
     stage ('Run BOOST test') {
-        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+        docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
             docker.image("biz/gccboost:latest").inside{
 				git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
 				sh 'cd buildToolsTest/gccboostlatest && make -f makefile all && make -f makefile runtest && make -f makefile clean'

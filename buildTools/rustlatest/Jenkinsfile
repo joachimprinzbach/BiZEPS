@@ -6,25 +6,25 @@ node {
     }
 
     stage ('Build Jenkins Slave image') {
-        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+        docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
             img = docker.build("biz/jenkinsslave:latest", "./buildServer/jenkins/slave")
         }
     }
 
     stage ('Build MCMA Tools image') {
-        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+        docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
             img = docker.build("biz/mcmatools:latest", "./buildTools/mcmatools")
         }
     }
     
     stage ('Build Rust image') {
-        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+        docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
             img = docker.build("biz/rust:latest", "./buildTools/rustlatest")
         }
     }
 
     stage ('Run Rust test') {
-        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+        docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
             docker.image("biz/rust:latest").inside{
 				git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
 				sh 'cd buildToolsTest/rustlatest && make -f makefile all && make -f makefile runtest && make -f makefile clean'
