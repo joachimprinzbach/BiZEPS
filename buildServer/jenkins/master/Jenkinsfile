@@ -1,4 +1,5 @@
 node {
+
   docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
   
     def imgJenkins
