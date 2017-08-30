@@ -12,8 +12,18 @@ RUN apt-get update && apt-get install -y \
     zip \
     && rm -rf /var/lib/apt/lists/*
 
+# Definition of jenkins user
 ARG user=jenkins
+ARG group=jenkins
+ARG uid=1000
+ARG gid=1000
 ENV JENKINS_HOME /var/jenkins_home
+
+# Jenkins runs with user `jenkins:jenkins`, uid = 1000, gid = 1000
+# If you bind mount a volume from the host or a data container, 
+# ensure you use the same uid
+RUN groupadd -g ${gid} ${group} \
+    && useradd -d "$JENKINS_HOME" -u ${uid} -g ${gid} -m -s /bin/bash ${user}
 
 # `/usr/share/jenkins/ref/` contains all reference configuration we want 
 # to set on a fresh new installation. Use it to bundle additional plugins 
