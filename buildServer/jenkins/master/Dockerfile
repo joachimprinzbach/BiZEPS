@@ -74,12 +74,16 @@ ENV COPY_REFERENCE_FILE_LOG $JENKINS_HOME/copy_reference_file.log
 # can be persisted and survive image upgrades
 VOLUME $JENKINS_HOME
 
+COPY ./resources/jenkins.sh /usr/local/bin/jenkins.sh
+RUN chmod +x /usr/local/bin/jenkins.sh
+
+COPY ./resources/plugins.sh /usr/local/bin/plugins.sh
+RUN chmod +x /usr/local/bin/plugins.sh
+
 USER ${user}
 
-COPY ./resources/jenkins.sh /usr/local/bin/jenkins.sh
 ENTRYPOINT ["/bin/tini", "--", "/usr/local/bin/jenkins.sh"]
 
 # from a derived Dockerfile, can use `RUN plugins.sh active.txt` to setup /usr/share/jenkins/ref/plugins from a support bundle
-COPY ./resources/plugins.sh /usr/local/bin/plugins.sh
 COPY ./resources/plugins.txt /usr/share/jenkins/plugins.txt
 RUN bash /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
