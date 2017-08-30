@@ -34,7 +34,9 @@ node {
         docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
             docker.image("biz/gccboostlatest:latest").inside{
 				git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
-				sh 'cd buildToolsTest/gccboostlatest && make -f makefile all && make -f makefile runtest && make -f makefile clean'
+				/*
+				 *sh 'cd buildToolsTest/gccboostlatest && make -f makefile all && make -f makefile runtest && make -f makefile clean'
+				 */
 			}
         }
     }
