@@ -27,10 +27,7 @@ node {
         docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
             docker.image("biz/rust:latest").inside{
 				git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
-				sh 'cd buildToolsTest/rustlatest && rustc main.rs'
-				/*
-				 *sh 'cd buildToolsTest/rustlatest && make all && make runtest && make clean'
-				 */
+				sh 'cd buildToolsTest/rustlatest && make -f makefile all && make -f makefile runtest && make -f makefile clean'
 			}
         }
     }
