@@ -1,4 +1,4 @@
-FROM bizeps/jenkinsuser
+FROM debian:jessie
 MAINTAINER Dominik Ebert <doe@zuehlke.com>
 
 # Modified official Jenkins Dockerfile
