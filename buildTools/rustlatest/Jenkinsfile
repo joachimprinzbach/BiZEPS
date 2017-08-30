@@ -1,0 +1,25 @@
+node {
+    def img
+
+    stage('Clone repository') {
+        git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
+    }
+
+    stage ('Build Jenkins Slave image') {
+        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+            img = docker.build("biz/jenkinsslave:latest", "./buildServer/jenkins/slave")
+        }
+    }
+
+    stage ('Build MCMA Tools image') {
+        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+            img = docker.build("biz/mcmatools:latest", "./buildTools/mcmatools")
+        }
+    }
+    
+    stage ('Build Rust image') {
+        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+            img = docker.build("biz/rust:latest", "./buildTools/rustlatest")
+        }
+    }
+}
