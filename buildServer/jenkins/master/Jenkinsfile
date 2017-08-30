@@ -1,13 +1,12 @@
 node {
-    def img
-
+  docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
     stage('Clone repository') {
-        git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
+      git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
     }
     
-    stage ('Build Jenkins Master') {
-        docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
-            img = docker.build("bizeps/jenkins:latest", "./buildServer/jenkins/master")
-        }
+    stage ('Build Jenkins Master') {    
+      def img = docker.build("bizeps/jenkins:latest", "./buildServer/jenkins/master")
+      img.push();
     }
+  }
 }
