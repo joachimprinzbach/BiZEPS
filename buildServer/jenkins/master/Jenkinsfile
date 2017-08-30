@@ -6,7 +6,7 @@ node {
     }
     
     stage ('Build Jenkins Master') {
-        docker.withServer('tcp://172.31.36.7:2376', '620b66c7-4b68-41b5-aedd-ddd1286b6ef0') {
+        docker.withServer('${DEFAULT_DOCKER_HOST_CONNECTION}', 'default-docker-host-credentials') {
             img = docker.build("bizeps/jenkins:latest", "./buildServer/jenkins/master")
         }
     }
