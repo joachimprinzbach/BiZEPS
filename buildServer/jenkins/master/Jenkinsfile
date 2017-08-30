@@ -4,9 +4,11 @@ node {
       git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
     }
     
-    stage ('Build Jenkins Master') {    
-      def img = docker.build("bizeps/jenkins:latest", "./buildServer/jenkins/master")
-      img.push();
+    stage ('Build Jenkins Master') {
+      docker.withRegistry('https://index.docker.io/v1/', 'default-docker-registry-credentials') {    
+        def img = docker.build("bizeps/jenkins:latest", "./buildServer/jenkins/master")
+        img.push();
+      }
     }
   }
 }
