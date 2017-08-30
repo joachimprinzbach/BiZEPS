@@ -19,14 +19,14 @@ node {
 
     stage ('Build GCC image') {
         docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
-            img = docker.build("biz/gcc:latest", "./buildTools/gcclatest")
+            img = docker.build("biz/gcclatest:latest", "./buildTools/gcclatest")
         }
     }
 	
    
-    stage ('Build BOOST test image') {
+    stage ('Build BOOST image') {
         docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
-            img = docker.build("biz/gccboost:latest", "./buildTools/gccboostlatest")
+            img = docker.build("biz/gccboostlatest:latest", "./buildTools/gccboostlatest")
         }
     }
 
