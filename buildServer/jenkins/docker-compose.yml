@@ -2,7 +2,7 @@ version: '2'
 services:
   jenkins:
     build: ./master
-    image: bizeps/jenkins
+    image: bizeps/jenkins:stable
     container_name: bizJenkins
     ports:
       - "8080:8080"
