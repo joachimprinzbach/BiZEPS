@@ -28,9 +28,12 @@ node {
             docker.image("biz/rust:latest").inside{
 				git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
 				sh 'cd buildToolsTest/rustlatest'
-				sh 'make all'
-				sh 'make runtest'
-				sh 'make clean'
+				sh 'ls -al'
+				/*
+				 *sh 'make all'
+				 *sh 'make runtest'
+				 *sh 'make clean'
+				 */
 			}
         }
     }
