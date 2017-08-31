@@ -12,7 +12,7 @@ node {
   docker.withServer(env.DEFAULT_DOCKER_HOST_CONNECTION, 'default-docker-host-credentials') {
   
     stage('Clone Repository') {
-      if ("${MY_RELEASE_VERSION" == "${TAG_LATEST}") {
+      if ("${MY_RELEASE_VERSION}" == "${TAG_LATEST}") {
         git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
       }
       else {
