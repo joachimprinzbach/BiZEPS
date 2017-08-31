@@ -7,51 +7,39 @@ The reference project describes the BiZEPS architecture, setup and configuration
 ##  Overview
 
 ```
-
-                                                      +-------------------------------+
-                                                      |                               |        +--------------------+
-                                                      |  h) Container                 |        |                    |
-                                                      |     Jenkins master            |      +-+------------------+ |
-                                                      |                               |      |                    | |
-                                                      |  +-------------------+        |    +-+------------------+ | |
-                                                      |  | Credentials Store |        |    |                    | +-+
-                                                      |  | * Dockerdaemon    |        |    | k) Container       | |
-                                     +-------------------+ * Dockerhub       |        |    |    Toolchain       +-+
-+----------------------+             |                |  | * ....            |        |    |                    |
-|                      |             |                |  |                   |        |    +----+---------+-----+
-| Host file system     |             |                |  +--------------------        |         ^         ^
-|                      |             |                |                               |         |         |
-| +-----------------+  |             |                |  +-------------------+        |         |         |
-| | c) Certificates |  |             |                |  | Docker client     +------------------+         |
-| |    Docker TLS   |  |             |                |  +-+-----------------+        |  l) Docker API    |
-| |=================|  |             |                |    ^                          |                   |
-| | client/ca.pem   |  |             |                |    |                          |                   |
-| | client/cert.pem +<---------------+                +---------------------------+---+                   |
-| | client/key.pem  |  |                                   |                      ^                       |
-| +-----------------+  |     +---------------------+       |                      |                       |
-| | server/ca.pem   |  |     |                     |       |                      |                       |
-| | server/cert.pem +<-------+ a) Docker daemon    |       | i) Docker daemon     | j) Network            | m) Network
-| | server/key.pem  |  |     |                     |       |    REST API access   |    access             |    access
-| +-----------------+  |     +---------------------+       |    (192.168.0.50)    |                       |
-|                      |     |                     |       |                      |                       |
-|                      |     | b) Docker REST API  |       |                      |                       |
-|                      |     |    (127.0.0.1)      |       |                      |                       |
-|                      |     |                     |       |                      +---------+             |
-|                      |     +---+-----------------+       |                                |             |
-|                      |         ^                         |                                |             |
-+----------------------+         |                         |                                |             |
-+---------------------------------------------------------------------------------------------------------------+
-|                                |                         |                                |             |     |
-| Host network setup             |                         |                                |             |     |
-|                                |                         v                                v             v     |
-| +------------------------+ +---+------------+     +------+-------------------------+ +----+-------------+---+ |
-| |                        | |                |     |                                | |                      | |
-| | d) eth0                | | e) localhost   +<----+ f) Routing table entry         | | g) docker0 bridge    | |
-| |    (192.168.0.10)      | |    (127.0.0.1) |     |    (192.168.0.50 =^ 127.0.0.1) | |    (172.17.0.1)      | |
-| |                        | |                |     |                                | |                      | |
-| +------------------------+ +----------------+     +--------------------------------+ +----------------------+ |
-|                                                                                                               |
-+---------------------------------------------------------------------------------------------------------------+
+                                      +------------------------+
+                                      |  f) Jenkins master     |
+                                      |     Container          |
+                                      |                        |
+                                      | +--------------------+ |
+                                      | |  Credentials Store | |
+                                      | |  * Dockerdaemon    | |
+              +-------------------------+  * Dockerhub       | |                         +--------------------+
+              |                       | |  * ....            | |                         |                    |
+Container     |                       | |                    | |                       +-+------------------+ |
+              |                       | +--------------------+ |                       |                    | |
+              |                       |                        |                     +-+------------------+ | |
+              |                       | +--------------------+ | j) Docker API       |                    | +-+
+              |                       | | Docker client      +-----------------------> i) Toolchain       | |
+              |                       | +-------------+------+ |                     |    Container       +-+
+              |                       |               |        |                     |                    |
+              |                       +----------------------^-+                     +--------^-----------+
+              |                                       |      |                                |
+              |      g) Docker Daemon REST API Access |      +------------------------------+ | h) Network Access
+              |                                       |                                     | |
+    +-----------------------------------------+----------------------------+-------------+-++-+--------------------+
+    |         |                               |       |                    |             | |                       |
+    | +-------v---------+-----------------+   |  +----v----------------+   |             | |                       |
+    | | client/ca.pem   | server/ca.pem   |   |  | b) Docker REST API  |   |  +----------v-v---+ +---------------+ |
+    | | client/cert.pem | server/cert.pem <-+ |  +---------------------+ bind |                | |               | |
+    | | client/key.pem  | server/key.pem  | +----+ a) Docker daemon    +---+--> e) docker0     | |d) eth0        | |
+Host| +-----------------+-----------------+   |  +---------------------+   |  |    (172.17.0.1)| |   (172.17.0.1)| |
+    | |     c) Docker TLS Certificates    |   |                            |  |                | |               | |
+    | +-----------------------------------+   |                            |  +----------------+ +---------------+ |
+    |                                         |                            |                                       |
+    | Host File System                        | Host Daemon                |   Host Network Interfaces             |
+    |                                         |                            |                                       |
+    +-----------------------------------------+----------------------------+---------------------------------------+
 
 ```
 
@@ -64,6 +52,7 @@ Other project requirements or customer needs may leed into a different project s
 ####  a) Docker daemon
 Docker images and container are managed through the docker daemon.
 Every docker command (e.g. `docker run ...`) is handled by the docker daemon.
+The docker daemon is bound to the docker0 bridge.
 
 ####  b) Docker REST API
 The docker daemon provides a REST API to access the daemon and execute docker commands.
@@ -83,24 +72,14 @@ The BiZEPS projects provides a [certGenerator utility](/utils/certGenerator/summ
 ####  d) eth0
 The physical network interface of the host.
 
-####  e) localhost
-The reference project publishes the docker REST API (b) only on the local host.
-
-####  f) Routing table entry
-A local routing table entry is used to enable the docker
-REST API access for other applications on the local host.
-A docker container (e.g. Jenkins master (h)) has the possibility to execute docker commands,
-but the client has still to authenticate himself with a TLS certificate.
-
-####  g) docker0 bridge
-The virtual docker0 interface is created by the docker daemon.
-This interface is used by the clients to communicate
+####  e) docker0 bridge
+The virtual docker0 interface is used to communicate
 - with each other
 - with the host
 - with other resources in the network (or internet)
 
 ### Jenkins Master
-####  h) Container Jenkins master
+####  f) Container Jenkins master
 The container with the Jenkins service.
 The Jenkins master manages the Jenkins configuration, plugins and builds.
 By default Jenkins master creates and starts a container for every build job.
@@ -111,26 +90,24 @@ A docker client allows Jenkins to interact with the Docker daemon (Docker host).
 There is no Docker daemon installed within the Jenkins container.
 The credentials to access the Docker host are stored in a credential store on Jenkins.
 
-####  i) Docker daemon REST API access
+####  g) Docker daemon REST API access
 To create, start and destroy containers the Jenkins master
 has to interact with the docker daemon (via REST API).
 The Jenkins master has to authenticate with the TLS certificate and key to access the docker daemon API.
 Jenkins master uses the routing table entry to access the docker daemon.
 
-####  j) Network access
+####  h) Network access
 To interact with the Jenkins server the 'public' network interface is published in the network.
+Even Jenkins slave container may access the public network.
 
 ### Buildjob container
-####  k) Container Toolchain
+####  i) Container Toolchain
 For every build job a dedicated toolchain container is started.
 The toolchain container contains the tools and basic configuration to fulfill a specific build job.
 By default a container shall contain one toolchain (in one specific version).
 
-####  l) Docker API
+####  j) Docker API
 Jenkins master controls the build containers with the Docker client through
 the Docker REST API provided by the docker host.
-
-####  m) Network access
-Even Jenkins slave container may access the public network.
 
 [next: Docker Configuration](02_DockerConfiguration.md)
