@@ -32,7 +32,7 @@ By default, the server certificate is created with the following properties:
 - SERVER_ALTNAMES=DNS:DockerHost,IP:127.0.0.1
 
 The default properties can be overridden with the following command:
-`docker-compose run --rm certGeneratorDockerHost "CA_NAME=MyHost" "SERVER_NAME=MyHost" "SERVER_ALTNAMES=DNS:MyHost,IP:127.0.0.1,IP:10.10.10.20"`
+`docker-compose run --rm certGenerator "CA_NAME=MyHost" "SERVER_NAME=MyHost" "SERVER_ALTNAMES=DNS:MyHost,IP:127.0.0.1,IP:10.10.10.20"`
 
 ##  Output
   - Create/use `output` directory on host in the execution folder
