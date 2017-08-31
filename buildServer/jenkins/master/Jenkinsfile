@@ -30,5 +30,6 @@ node {
           imgJenkins.push("${TAG_STABLE}")
       }
     }
+
   }
 }
