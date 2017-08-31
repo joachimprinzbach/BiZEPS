@@ -1,0 +1,6 @@
+version: '2'
+services:
+  gcc:
+    build: .
+    image: biz/gccboostlatest
+    container_name: bizgccboostlatest

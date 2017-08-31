@@ -1,0 +1,6 @@
+version: '2'
+services:
+  mcmatools:
+    build: .
+    image: biz/mcmatools
+    container_name: mcmatools

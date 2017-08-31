@@ -1,0 +1,6 @@
+version: '2'
+services:
+  gcc:
+    build: .
+    image: biz/gccgtestlatest
+    container_name: bizgccgtestlatest

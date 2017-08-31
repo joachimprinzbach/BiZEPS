@@ -1,7 +1,7 @@
-FROM biz/jenkinsslave
+FROM debian:jessie
 MAINTAINER Peter Schmid <peter.schmid@zuehlke.com>
 
-# add basic build tools make cmale and auto tools to jenkins slave
+# add basic build tools: make cmake and auto tools to jenkins slave
 
 RUN apt-get update && apt-get install -y \
   make \
