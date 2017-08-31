@@ -12,7 +12,14 @@ node {
   docker.withServer(env.DEFAULT_DOCKER_HOST_CONNECTION, 'default-docker-host-credentials') {
   
     stage('Clone Repository') {
-      git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'      
+      if ("${MY_RELEASE_VERSION" == "${TAG_LATEST}") {
+        git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
+      }
+      else {
+        checkout scm: [$class: 'GitSCM', 
+          userRemoteConfigs: [[url: 'https://github.com/Zuehlke/BiZEPS.git']], 
+          branches: [[name: "refs/tags/${MY_RELEASE_VERSION}"]]], changelog: false, poll: false
+      }
     }
     
     stage ('Build Images') {
