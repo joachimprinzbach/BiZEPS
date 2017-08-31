@@ -103,9 +103,13 @@ This interface is used by the clients to communicate
 ####  h) Container Jenkins master
 The container with the Jenkins service.
 The Jenkins master manages the Jenkins configuration, plugins and builds.
-By default Jenkins master creates and starts a slave container for every build job.
-The build is executed in a slave container, the build results are returned
+By default Jenkins master creates and starts a container for every build job.
+The build is executed in a container, the build results are returned
 to the Jenkins master and afterwards the container is destroyed.
+
+A docker client allows Jenkins to interact with the Docker daemon (Docker host).
+There is no Docker daemon installed within the Jenkins container.
+The credentials to access the Docker host are stored in a credential store on Jenkins.
 
 ####  i) Docker daemon REST API access
 To create, start and destroy containers the Jenkins master
@@ -116,15 +120,15 @@ Jenkins master uses the routing table entry to access the docker daemon.
 ####  j) Network access
 To interact with the Jenkins server the 'public' network interface is published in the network.
 
-### Jenkins Slaves
-####  k) Container Jeknins slave
-For every build job a dedicated slave container is started.
-The slave container contains the utilities to be accessed by the Jenkins master
-and the toolchain to fulfill a specific build job.
+### Buildjob container
+####  k) Container Toolchain
+For every build job a dedicated toolchain container is started.
+The toolchain container contains the tools and basic configuration to fulfill a specific build job.
 By default a container shall contain one toolchain (in one specific version).
 
-####  l) SSH
-Jenkins master controls the slave containers with an SSH connection.
+####  l) Docker API
+Jenkins master controls the build containers with the Docker client through
+the Docker REST API provided by the docker host.
 
 ####  m) Network access
 Even Jenkins slave container may access the public network.
