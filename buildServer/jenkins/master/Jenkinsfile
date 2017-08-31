@@ -1,19 +1,34 @@
 node {
-
-  docker.withServer("${DEFAULT_DOCKER_HOST_CONNECTION}", 'default-docker-host-credentials') {
+    
+  def imgJenkins
   
-    def imgJenkins
+  def TAG_LATEST='latest'
+  def TAG_STABLE='stable'
+  
+  def MY_IMAGE_NAME = env.IMAGE_NAME != null ? env.IMAGE_NAME : "bizeps/jenkins"
+  def MY_RELEASE_VERSION = env.RELEASE_VERSION != null ? env.RELEASE_VERSION : "${TAG_LATEST}"
+  def MY_RELEASE_AS_STABLE = env.RELEASE_AS_STABLE != null ? env.RELEASE_AS_STABLE : false
+
+  docker.withServer(env.DEFAULT_DOCKER_HOST_CONNECTION, 'default-docker-host-credentials') {
   
     stage('Clone Repository') {
-      git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'
+      git branch: 'master', url: 'https://github.com/Zuehlke/BiZEPS.git'      
     }
     
     stage ('Build Images') {
-      imgJenkins = docker.build("bizeps/jenkins:latest", "./buildServer/jenkins/master")
+      imgJenkins = docker.build("${MY_IMAGE_NAME}:${TAG_LATEST}", "./buildServer/jenkins/master")
     }
     
-    stage ('Push Images') {
-        imgJenkins.push();
+    stage ('Push Images') {  
+      imgJenkins.push()
+      
+      if ("${MY_RELEASE_VERSION}" != "${TAG_LATEST}") {
+          imgJenkins.push("${MY_RELEASE_VERSION}")
+      }
+      
+      if ("${MY_RELEASE_AS_STABLE}" == "true") {
+          imgJenkins.push("${TAG_STABLE}")
+      }
     }
   }
 }
