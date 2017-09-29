@@ -3,6 +3,21 @@
 #   Jenkins Configuration
 Configure the Jenkins to connect to the docker daemon, start and create containers and run a build job.
 
+##  Initial Jenkins Startup
+The Jenkins server instance can be started with a docker-compose script.
+In the project space change to the directory `buildServer/jenkins` and execute the command `docker-compose up`.
+Executing the `docker-compose` command will lead into the following actions:
+- Uses the image `bizeps/jenkins:stable`
+  - If the image is not available on the local host, it tries to pull the image from the docker hub
+  - If the image is not available on docker hub, it tries to build the image with the information from the `Dockerfile`
+- Uses a volume container for the Jenkins home directory
+  - If a volume container is existing, it will be reused
+  - Elsewise a new volume container will be created
+- Starts the Jenkins server, listening on port 8080
+
+Connect to the Jenkins server with your browser. Use the IP of the host machine (e.g. `172.17.0.1:8080`).
+If Jenkins is started for the first time, the basic setup and security configuration has to be executed.
+
 ##  Required Plugins
 - [Docker Commons Plugin](https://wiki.jenkins-ci.org/display/JENKINS/Docker+Commons+Plugin)
 - [Docker Pipeline Plugin](https://wiki.jenkins.io/display/JENKINS/Docker+Pipeline+Plugin)
