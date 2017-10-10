@@ -1,2 +1,5 @@
 blueocean
+git
+git-parameter
+github
 github-oauth

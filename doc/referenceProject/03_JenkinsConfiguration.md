@@ -5,7 +5,7 @@ Configure the Jenkins to connect to the docker daemon, start and create containe
 
 ##  Initial Jenkins Startup
 The Jenkins server instance can be started with a docker-compose script.
-In the project space change to the directory `buildServer/jenkins` and execute the command `docker-compose up`.
+In the project space change to the directory `buildServer/jenkins` and execute the command `docker-compose up -d`.
 Executing the `docker-compose` command will lead into the following actions:
 - Uses the image `bizeps/jenkins:stable`
   - If the image is not available on the local host, it tries to pull the image from the docker hub
@@ -13,7 +13,10 @@ Executing the `docker-compose` command will lead into the following actions:
 - Uses a volume container for the Jenkins home directory
   - If a volume container is existing, it will be reused
   - Elsewise a new volume container will be created
-- Starts the Jenkins server, listening on port 8080
+- Starts the Jenkins server in a container
+  - Container name is `bizJenkins`
+  - Listening on port 8080
+  - Starting in detached mode (parameter `-d`)
 
 Connect to the Jenkins server with your browser. Use the IP of the host machine (e.g. `172.17.0.1:8080`).
 If Jenkins is started for the first time, the basic setup and security configuration has to be executed.
