@@ -34,8 +34,10 @@ node {
 
   echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
   if("${buildUtils.getCurrentBuildBranch()}" != "origin/master" ) {
-    echo "Should abort the build"
-    currentBuild.result = 'SUCCESS'
+    stage("Abort") {
+      echo "Do not build branche with that naming schema"
+    }
+    currentBuild.result = 'ABORTED'
     return
   }
 
