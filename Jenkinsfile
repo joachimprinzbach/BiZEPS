@@ -35,11 +35,10 @@ node {
   if(("${buildUtils.getCurrentBuildBranch()}" != "master") ||
      ("${buildUtils.getCurrentBuildBranch()}".startsWith("${repositoryUtils.getBranchStable()}/") == false) ||
      ("${buildUtils.getCurrentBuildBranch()}".startsWith("${repositoryUtils.getBranchRelease()}/") == false)) {
-    stage("Abort") {
-      echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
-      echo "Do not build branche with that naming schema: ${buildUtils.getCurrentBuildBranch()}"
-      echo "Does not match ${repositoryUtils.getBranchLatest()}"
-    }
+
+    echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
+    echo "Do not build branche with that naming schema: ${buildUtils.getCurrentBuildBranch()}"
+    echo "Does not match ${repositoryUtils.getBranchLatest()}"
     currentBuild.result = 'ABORTED'
     return
   }
