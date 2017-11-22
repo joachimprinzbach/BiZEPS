@@ -38,9 +38,9 @@ node {
         stage("Abort build") {
           echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
           echo "Do not build branche with that naming schema: ${buildUtils.getCurrentBuildBranch()}"
-          currentBuild.result = 'ABORTED'
-          return
         }
+        currentBuild.result = 'ABORTED'
+        return
   }
 
   repositoryUtils.checkoutCurrentBranch {
