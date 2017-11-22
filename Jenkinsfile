@@ -32,7 +32,7 @@ node {
       numToKeepStr: '5', daysToKeepStr: '5'))
   ])
 
-  if(("${buildUtils.getCurrentBuildBranch()}" != "master") ||
+  if((buildUtils.getCurrentBuildBranch() != "master") ||
      ("${buildUtils.getCurrentBuildBranch()}".startsWith("${repositoryUtils.getBranchStable()}/") == false) ||
      ("${buildUtils.getCurrentBuildBranch()}".startsWith("${repositoryUtils.getBranchRelease()}/") == false)) {
 
