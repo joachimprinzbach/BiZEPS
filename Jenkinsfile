@@ -32,6 +32,14 @@ node {
       numToKeepStr: '5', daysToKeepStr: '5'))
   ])
 
+  stage("Prebuild Evaluation") {
+    echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
+    if("${buildUtils.getCurrentBuildBranch()}" != "origin/master" ) {
+      currentBuild.result = 'ABORTED'
+      return
+    }
+  }
+
   repositoryUtils.checkoutCurrentBranch {
     stageName = 'Checkout'
     repoUrl = "${projectSettings.repository.url}"
