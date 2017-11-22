@@ -35,7 +35,7 @@ node {
   if ((buildUtils.getCurrentBuildBranch() != repositoryUtils.getBranchLatest()) ||
       (buildUtils.getCurrentBuildBranch().startsWith(repositoryUtils.getBranchStable() + "/") == false) ||
       (buildUtils.getCurrentBuildBranch().startsWith(repositoryUtils.getBranchRelease() + "/") == false)) {
-        step("Abort build") {
+        stage("Abort build") {
           echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
           echo "Do not build branche with that naming schema: ${buildUtils.getCurrentBuildBranch()}"
           currentBuild.result = 'ABORTED'
