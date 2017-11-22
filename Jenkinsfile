@@ -32,12 +32,11 @@ node {
       numToKeepStr: '5', daysToKeepStr: '5'))
   ])
 
-  stage("Prebuild Evaluation") {
-    echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
-    if("${buildUtils.getCurrentBuildBranch()}" != "origin/master" ) {
-      currentBuild.result = 'SUCCESS'
-      return
-    }
+  echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
+  if("${buildUtils.getCurrentBuildBranch()}" != "origin/master" ) {
+    echo "Should abort the build"
+    currentBuild.result = 'SUCCESS'
+    return
   }
 
   repositoryUtils.checkoutCurrentBranch {
