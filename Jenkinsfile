@@ -32,8 +32,8 @@ node {
       numToKeepStr: '5', daysToKeepStr: '5'))
   ])
 
-  if ((buildUtils.getCurrentBuildBranch() != repositoryUtils.getBranchLatest()) ||
-      (buildUtils.getCurrentBuildBranch().startsWith(repositoryUtils.getBranchStable() + "/") == false) ||
+  if ((buildUtils.getCurrentBuildBranch() != repositoryUtils.getBranchLatest()) &&
+      (buildUtils.getCurrentBuildBranch().startsWith(repositoryUtils.getBranchStable() + "/") == false) &&
       (buildUtils.getCurrentBuildBranch().startsWith(repositoryUtils.getBranchRelease() + "/") == false)) {
         stage("Abort build") {
           echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
