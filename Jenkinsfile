@@ -32,10 +32,10 @@ node {
       numToKeepStr: '5', daysToKeepStr: '5'))
   ])
 
-  echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
-  if("${buildUtils.getCurrentBuildBranch()}" != "origin/master" ) {
+  if("${buildUtils.getCurrentBuildBranch()}" != "master" ) {
     stage("Abort") {
-      echo "Do not build branche with that naming schema"
+      echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
+      echo "Do not build branche with that naming schema: ${buildUtils.getCurrentBuildBranch()}"
     }
     currentBuild.result = 'ABORTED'
     return
