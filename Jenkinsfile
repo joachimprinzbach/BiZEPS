@@ -35,7 +35,7 @@ node {
   stage("Prebuild Evaluation") {
     echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
     if("${buildUtils.getCurrentBuildBranch()}" != "origin/master" ) {
-      currentBuild.result = 'ABORTED'
+      currentBuild.result = 'SUCCESS'
       return
     }
   }
