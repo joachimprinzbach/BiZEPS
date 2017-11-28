@@ -60,7 +60,7 @@ node {
         }
       }
       stage("Push") {
-        dockerImage.setupPushTasks {
+        parallel dockerImage.setupPushTasks {
           dockerRegistryUser = "${projectSettings.dockerHub.user}"
           buildJobs = projectSettings.dockerJobs
         }
