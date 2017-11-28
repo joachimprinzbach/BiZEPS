@@ -7,8 +7,8 @@ def projectSettings = readJSON text: '''{
     "user": "bizeps"
   },
   "dockerJobs": [
-    {"imageName": "jenkins",      "dockerfilePath": "./buildServer/jenkins/master" },
-    {"imageName": "asciidoctor",  "dockerfilePath": "./buildTools/asciidoctor" }
+    {"imageName": "jenkins",        "dockerfilePath": "./buildServer/jenkins/master" },
+    {"imageName": "certGenerator",  "dockerfilePath": "./utils/certGenerator"},
   ]
 }'''
 
