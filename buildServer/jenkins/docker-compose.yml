@@ -2,8 +2,9 @@ version: '2'
 services:
   jenkins:
     build: ./master
-    image: bizeps/jenkins:stable
+    image: bizeps/jenkins:2.73.3-r1
     container_name: bizJenkins
+    restart: always
     ports:
       - "8080:8080"
     volumes:
