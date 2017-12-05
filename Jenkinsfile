@@ -27,8 +27,13 @@ library identifier: 'common-pipeline-library@stable',
       [$class: 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait', strategyId: 1, trust: [$class: 'TrustContributors']]]))
 
 node {
+  def triggers = []
+  if (repositoryUtils.isLatestBranch() == true) {
+	triggers << cron('H 15 * * *')
+  }
 
   properties([
+    pipelineTriggers(triggers),
     buildDiscarder(logRotator(
       artifactDaysToKeepStr: '5', artifactNumToKeepStr: '5',
       numToKeepStr: '5', daysToKeepStr: '5'))
