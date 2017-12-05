@@ -24,24 +24,17 @@ library identifier: 'common-pipeline-library@stable',
       [$class: 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait', strategyId: 1, trust: [$class: 'TrustContributors']]]))
 
 node {
+  def triggers = []
+  if (repositoryUtils.isLatestBranch() == true) {
+	triggers << cron('H 15 * * *')
+  }
 
   properties([
-    pipelineTriggers([cron('H 15 * * 2')]),
+    pipelineTriggers(triggers),
     buildDiscarder(logRotator(
       artifactDaysToKeepStr: '5', artifactNumToKeepStr: '5',
       numToKeepStr: '5', daysToKeepStr: '5'))
   ])
-
-  if ((buildUtils.getCurrentBuildBranch() != repositoryUtils.getBranchLatest()) &&
-      (buildUtils.getCurrentBuildBranch().startsWith(repositoryUtils.getBranchStable() + "/") == false) &&
-      (buildUtils.getCurrentBuildBranch().startsWith(repositoryUtils.getBranchRelease() + "/") == false)) {
-        stage("Abort build") {
-          echo "Current branch: ${buildUtils.getCurrentBuildBranch()}"
-          echo "Do not build branche with that naming schema: ${buildUtils.getCurrentBuildBranch()}"
-        }
-        currentBuild.result = 'ABORTED'
-        return
-  }
 
   repositoryUtils.checkoutCurrentBranch {
     stageName = 'Checkout'
