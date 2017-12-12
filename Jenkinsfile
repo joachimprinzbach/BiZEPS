@@ -20,15 +20,14 @@ library identifier: 'common-pipeline-library@stable',
       remote: 'https://github.com/icebear8/pipelineLibrary',
       credentialsId: '3bc30eda-c17e-4444-a55b-d81ee0d68981',
       traits: [
-        [$class: 'org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait', strategyId: 1],
-        [$class: 'org.jenkinsci.plugins.github_branch_source.OriginPullRequestDiscoveryTrait', strategyId: 1],
-        [$class: 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait', strategyId: 1, trust: [$class: 'TrustContributors']]]
+        [$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait'],
+        [$class: 'PruneStaleBranchTrait']]
     ])
 
 node {
   def triggers = []
   if (repositoryUtils.isLatestBranch() == true) {
-	triggers << cron('H 15 * * *')
+    triggers << cron('H 15 * * *')
   }
 
   properties([
