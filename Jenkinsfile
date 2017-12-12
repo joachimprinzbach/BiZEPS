@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 def projectSettings = readJSON text: '''{
   "repository": {
     "url": "https://github.com/Zuehlke/BiZEPS.git",
