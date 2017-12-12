@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+
 def projectSettings = readJSON text: '''{
   "repository": {
     "url": "https://github.com/Zuehlke/BiZEPS.git",
@@ -15,20 +17,19 @@ def projectSettings = readJSON text: '''{
 
 // Uses the common library form 'https://github.com/icebear8/pipelineLibrary'
 library identifier: 'common-pipeline-library@stable',
-  retriever: modernSCM(github(
-    id: '18306726-fec7-4d80-8226-b78a05add4d0',
-    credentialsId: '3bc30eda-c17e-4444-a55b-d81ee0d68981',
-    repoOwner: 'icebear8',
-    repository: 'pipelineLibrary',
-    traits: [
-      [$class: 'org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait', strategyId: 1],
-      [$class: 'org.jenkinsci.plugins.github_branch_source.OriginPullRequestDiscoveryTrait', strategyId: 1],
-      [$class: 'org.jenkinsci.plugins.github_branch_source.ForkPullRequestDiscoveryTrait', strategyId: 1, trust: [$class: 'TrustContributors']]]))
+  retriever: modernSCM(
+    [$class: 'GitSCMSource',
+      remote: 'https://github.com/icebear8/pipelineLibrary',
+      credentialsId: '3bc30eda-c17e-4444-a55b-d81ee0d68981',
+      traits: [
+        [$class: 'jenkins.plugins.git.traits.BranchDiscoveryTrait'],
+        [$class: 'PruneStaleBranchTrait']]
+    ])
 
 node {
   def triggers = []
   if (repositoryUtils.isLatestBranch() == true) {
-	triggers << cron('H 15 * * *')
+    triggers << cron('H 15 * * *')
   }
 
   properties([
