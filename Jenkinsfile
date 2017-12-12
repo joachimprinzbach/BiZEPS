@@ -17,7 +17,7 @@ def projectSettings = readJSON text: '''{
 library identifier: 'common-pipeline-library@stable',
   retriever: modernSCM(
     [$class: 'GitSCMSource',
-      remote: 'github.com/icebear8/pipelineLibrary',
+      remote: 'https://github.com/icebear8/pipelineLibrary',
       credentialsId: '3bc30eda-c17e-4444-a55b-d81ee0d68981',
       traits: [
         [$class: 'org.jenkinsci.plugins.github_branch_source.BranchDiscoveryTrait', strategyId: 1],
